@@ -30,7 +30,5 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/resources/contents/editar.png"/>
-	<classpathentry kind="lib" path="src/main/resources/contents/eliminar.png"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

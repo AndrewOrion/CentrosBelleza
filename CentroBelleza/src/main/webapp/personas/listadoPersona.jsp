@@ -62,9 +62,8 @@ List<Persona> lista = pDAO.getListaPersonas();
 				<td><%=a.getFechaAlta() %></td>
 				<td><%=a.getIp() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><a href="?opcion=editar&ID=<%=a.getId()%>"><img class="img3" src="https://previews.123rf.com/images/faysalfarhan/faysalfarhan1502/faysalfarhan150200768/36422940-editar-icono-de-documento-bot%C3%B3n-azul-vidrioso.jpg" alt="Editar"/></a></td>		
-				<td><a href="?opcion=editar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
-				
+				<td><form action="PersonasEditar" method="post"><button type="submit" name="idPersona" value='<%=a.getId() %>'>Actualizar</button></form></td>
+				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
 	
 			</tr>
 		

@@ -5,8 +5,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
-import dao.CentroDAO;
-import dao.CentroDAOJDBC;
+
 import dao.PersonaDAO;
 import dao.PersonaDAOMySQL;
 import jakarta.servlet.ServletException;
@@ -14,15 +13,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Centro;
+
 import modelo.Persona;
 
 
 /**
  * Servlet implementation class BellezaServlet
- */
-@WebServlet("/PersonasServlet")
-
+ 
+@WebServlet("/PersonasServlet")*/
+@WebServlet(
+	    name = "PersonasServlet", 
+	    urlPatterns = {"/PersonasServlet"}
+	)
 	
 public class PersonasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
