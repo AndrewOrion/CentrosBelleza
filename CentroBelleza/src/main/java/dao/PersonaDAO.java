@@ -6,10 +6,11 @@ import modelo.Persona;
 
 public interface PersonaDAO {
 
-	List<Persona> getListaPersonas();
-	Persona getPersona(String ID);
-	int insertarPersona(Persona p);
-	int eliminarPersona(String ID);
-	int actualizarPersona(Persona p);
+	public List<Persona> getListaPersonas();
+	public Persona getPersona(String id);
+	public int insertarPersona(Persona p);
+	public int eliminarPersona(String id);
+//	public int editarPersona(Persona p);
+	public int modificarPersona(Persona p);
 	
 }

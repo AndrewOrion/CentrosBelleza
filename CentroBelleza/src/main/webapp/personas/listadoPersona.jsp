@@ -9,8 +9,8 @@
 
 <h1>Listado de Personas</h1>
 <%
-PersonaDAO bellezaDAO = new PersonaDAOMySQL();
-List<Persona> lista = bellezaDAO.getListaPersonas();
+PersonaDAO pDAO = new PersonaDAOMySQL();
+List<Persona> lista = pDAO.getListaPersonas();
 
    if (lista==null || lista.size()==0) {
 %>
@@ -39,27 +39,31 @@ List<Persona> lista = bellezaDAO.getListaPersonas();
 	for (Persona a:lista) {
 	%>
 			<tr>
-				<td><%=a.getID() %></td>
+				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
 				<td><%=a.getDocumento() %></td>
 				<td><%=a.getFechaNacimiento() %></td>
 				<td><%=a.getDireccion() %></td>
 				<td><%=a.getLocalidad() %></td>
 				<td><%=a.getCp() %></td>
-				<td><%=a.getProvinciaID() %></td>
+				<td><%=a.getProvinciaId() %></td>
 				<td><%=a.getEmail() %></td>
 				<td><%=a.getTelefono() %></td>
 				<td><%=a.getComunicaciones() %></td>
 				<td><%=a.getFechaAlta() %></td>
-				<td><%=a.getIP() %></td>
+				<td><%=a.getIp() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><a href="?opcion=eliminar&ID=<%=a.getID()%>">X</a></td>	
-				<td><a href="?opcion=editar&ID=<%=a.getID()%>">Editar</a></td>	
+				<td class="circulo"><a href="?opcion=editar&ID=<%=a.getId()%>">Editar</a></td>		
+				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>">X</a></td>
+				
+	
 			</tr>
+		
 			<%
 		}
 }
 	%>
+	</table>
 	
-</table>
+
 <a href="?opcion=nuevo">Insertar Persona</a>

@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Persona {
 
-	private String ID;
+	private String id;
 	private String nombre;
 	private String documento;
 	private String fechaNacimiento;
@@ -23,30 +23,19 @@ public class Persona {
 	private String telefono;
 	private String comunicaciones;
 	private String fechaAlta;
-	private String IP;
+	private String ip;
 	private boolean activo;
+	private String provinciaId;
 	
-/*	public Persona() {
-		this.ID = "";
-		this.nombre = "";
-		this.documento = "";
-		this.direccion = "";
-		this.localidad = "";
-		this.cp = "";
-		this.provinciaID = provinciaID;
-		this.email = email;
-		this.telefono = telefono;
-		this.comunicaciones = comunicaciones;
-		this.fechaAlta = fechaAlta;
-		this.IP = iP;
-		this.activo = activo;
-	}*/
+	public Persona() {
+		
+	}
 	
-	public Persona(String iD, String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
+	public Persona(String id, String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
 			String cp, String provinciaID, String email, String telefono, String comunicaciones, String fechaAlta,
-			String iP, boolean activo) {
+			String ip, boolean activo) {
 		super();
-		this.ID = iD;
+		this.id = id;
 		this.nombre = nombre;
 		this.documento = documento;
 		this.fechaNacimiento = fechaNacimiento;
@@ -58,16 +47,35 @@ public class Persona {
 		this.telefono = telefono;
 		this.comunicaciones = comunicaciones;
 		this.fechaAlta = fechaAlta;
-		this.IP = iP;
+		this.ip = ip;
+		this.activo = activo;
+	}
+	
+	public Persona(String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
+			String cp, String provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
+			String ip, boolean activo) {
+		super();
+		this.nombre = nombre;
+		this.documento = documento;
+		this.fechaNacimiento = fechaNacimiento;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.cp = cp;
+		this.provinciaId = provinciaId;
+		this.email = email;
+		this.telefono = telefono;
+		this.comunicaciones = comunicaciones;
+		this.fechaAlta = fechaAlta;
+		this.ip = ip;
 		this.activo = activo;
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -118,12 +126,12 @@ public class Persona {
 		this.cp = cp;
 	}
 
-	public String getProvinciaID() {
-		return provinciaID;
+	public String getProvinciaId() {
+		return provinciaId;
 	}
 
-	public void setProvinciaID(String provinciaID) {
-		this.provinciaID = provinciaID;
+	public void setProvinciaId(String provinciaId) {
+		this.provinciaId = provinciaId;
 	}
 
 	public String getEmail() {
@@ -158,12 +166,12 @@ public class Persona {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public String getIP() {
-		return IP;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setIP(String iP) {
-		IP = iP;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public boolean isActivo() {
@@ -176,7 +184,7 @@ public class Persona {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ID);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -188,15 +196,15 @@ public class Persona {
 		if (getClass() != obj.getClass())
 			return false;
 		Persona other = (Persona) obj;
-		return Objects.equals(ID, other.ID);
+		return Objects.equals(id, other.id);
 	}
 
 	@Override
 	public String toString() {
-		return "Persona [ID=" + ID + ", nombre=" + nombre + ", documento=" + documento + ", fechaNacimiento="
+		return "Persona [ID=" + id + ", nombre=" + nombre + ", documento=" + documento + ", fechaNacimiento="
 				+ fechaNacimiento + ", direccion=" + direccion + ", localidad=" + localidad + ", cp=" + cp
 				+ ", provinciaID=" + provinciaID + ", email=" + email + ", telefono=" + telefono + ", comunicaciones="
-				+ comunicaciones + ", fechaAlta=" + fechaAlta + ", IP=" + IP + ", activo=" + activo + "]";
+				+ comunicaciones + ", fechaAlta=" + fechaAlta + ", IP=" + ip + ", activo=" + activo + "]";
 	}
 	
 	

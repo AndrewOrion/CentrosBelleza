@@ -10,14 +10,15 @@
 </head>
 <body>
     <h1>Alta de Persona</h1>
-        <form action="BellezaServlet" method="post">
+        <form action="PersonasServlet" method="post">
         <div>
+        <input type="hidden" name="opcion" value="insertar"/>
             <label for="nombre">Nombre Completo*:</label>
             <input type="text" name="nombre" id="nombre" required>
         </div>
         <div>
             <label for="documento">DNI*:</label>
-            <input type="text" name="dni" id="dni" pattern="[0-9]{8}[A-Za-z]{1}" required>
+            <input type="text" name="documento" id="documento"  pattern="[0-9]{8}[A-Za-z]{1}" required>
         </div>
         <div>
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
@@ -47,7 +48,7 @@
         </div>
         <div>
             <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefonocp" id="telefono">
+            <input type="text" name="telefono" id="telefono">
         </div>
         <div>
             <label for="comunicaciones">Comunicaciones:</label>
@@ -63,10 +64,7 @@
         </div>
         <div>
             <label for="activo">Activo:</label>
-            <input type="radio" name="activo" value="si" checked>
-            <label for="automovil">Sí</label>
-            <input type="radio" name="activo" value="no">
-            <label for="hogar">No</label>
+            <input type="checkbox" name="activo" id="activo">
           </div>
         <div>
             <input type="submit" value="Confirmar">
