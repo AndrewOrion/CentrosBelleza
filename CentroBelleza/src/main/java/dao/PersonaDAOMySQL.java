@@ -68,7 +68,6 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			}
 		}
 
-		
 		return listaPersonas;
 	}
 
@@ -196,7 +195,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 	@Override
 	public int modificarPersona(Persona persona) {
 		Connection con = conexion.getConexion();
-		PreparedStatement consulta =null;
+		PreparedStatement consultaPreparada =null;
 		int resultado=0;
 		try {
 			consultaPreparada = con.prepareStatement("UPDATE personas "
@@ -237,7 +236,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 					+e.getMessage());
 		} finally {
 			try {
-				consulta.close();
+				consultaPreparada.close();
 				conexion.desconectar();
 			} catch (SQLException e) {
 				System.out.println("Error al liberar recursos: "+e.getMessage());

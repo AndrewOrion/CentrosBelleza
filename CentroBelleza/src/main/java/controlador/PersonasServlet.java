@@ -5,7 +5,8 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
-
+import dao.CentroDAO;
+import dao.CentroDAOJDBC;
 import dao.PersonaDAO;
 import dao.PersonaDAOMySQL;
 import jakarta.servlet.ServletException;
@@ -13,7 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import modelo.Centro;
 import modelo.Persona;
 
 
@@ -61,9 +62,9 @@ public class PersonasServlet extends HttpServlet {
 			mostrarFormularioAlta(request,response);
 		} else if (opcion.equals("eliminar")) {
 			eliminarPersona(request,response);
-		}/*else if (opcion.equals("editar")) {
-			mostrarFormularioEditar(request,response);
-		}*/else if (opcion.equals("modificar")) {
+		}else if (opcion.equals("editar")) {
+			System.out.println(opcion);;
+		}else if (opcion.equals("modificar")) {
 			modificarPersona(request,response);
 		}
 	}
@@ -79,9 +80,7 @@ public class PersonasServlet extends HttpServlet {
 		}
 	}
 		
-	private void insertarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	private void insertarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		//ID = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		documento = request.getParameter("documento");
@@ -123,16 +122,16 @@ public class PersonasServlet extends HttpServlet {
 		String id = request.getParameter("ID"); 
 		
 		PersonaDAO dao = new PersonaDAOMySQL();
-		List<Persona> lista = dao.getListaPersonas();
-		request.setAttribute("listaPersonas", lista);
-		Persona p = dao.getPersona(id);
-		request.setAttribute("persona",p);	
-		request.getRequestDispatcher("/personas/editarPersona.jsp").forward(request, response);
 		
-		mostrarListado(request,response); 
-
+		
+		Persona persona = dao.getPersona(id);
+		request.setAttribute("persona",persona);	
+		request.getRequestDispatcher("/personas/editarPersona.jsp").forward(request, response);
 	}
-
+	
+	
+	
+	
 	private void mostrarListado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		PersonaDAO dao = new PersonaDAOMySQL();//instancia la persona para acceder a bd
@@ -151,7 +150,7 @@ public class PersonasServlet extends HttpServlet {
 		
 	}
 	
-   private void modificarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void modificarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		nombre = request.getParameter("nombre");
 		documento = request.getParameter("documento");
@@ -167,15 +166,16 @@ public class PersonasServlet extends HttpServlet {
 		ip = request.getParameter("ip");
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
-		Persona per = new Persona(nombre, documento, fechaNacimiento, direccion,
+		Persona persona = new Persona(nombre, documento, fechaNacimiento, direccion,
 				localidad, cp, provinciaId, email, telefono,comunicaciones,fechaAlta,
 				ip,activo);
 		
-		PersonaDAO dao1 = new PersonaDAOMySQL();
-		dao1.modificarPersona(per);
+		PersonaDAO dao = new PersonaDAOMySQL();
+		dao.modificarPersona(persona);
 		mostrarListado(request, response);
 		
 	}
+    
+   
 	
-		
 }
