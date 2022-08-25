@@ -2,19 +2,19 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
-
 
 import dao.PersonaDAO;
 import dao.PersonaDAOMySQL;
+import dao.ProvinciaDAO;
+import dao.ProvinciaDAOMySQL;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import modelo.Persona;
+import modelo.Provincia;
 
 
 /**
@@ -35,7 +35,7 @@ public class PersonasServlet extends HttpServlet {
 	String direccion;
 	String localidad;
 	String cp;
-	String provinciaId;
+	int provinciaId;
 	String email;
 	String telefono;
 	String comunicaciones;
@@ -83,20 +83,25 @@ public class PersonasServlet extends HttpServlet {
 	}
 		
 	private void insertarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		//ID = request.getParameter("id");
+		PrintWriter out = response.getWriter();
+		
+		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		documento = request.getParameter("documento");
 		fechaNacimiento = request.getParameter("fechaNacimiento");
 		direccion = request.getParameter("direccion");
 		localidad = request.getParameter("localidad");
 		cp = request.getParameter("cp");
-		provinciaId = request.getParameter("provinciaID");
+		provinciaId = Integer.parseInt(request.getParameter("provinciaId"));
 		email = request.getParameter("email");
 		telefono = request.getParameter("telefono");
 		comunicaciones = request.getParameter("comunicaciones");
 		fechaAlta = request.getParameter("fechaAlta");
 		ip = request.getParameter("ip");
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
+		
+		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
+		Provincia pro= listaProvinciaDAO.getProvincia(provinciaId);
 		
 		Persona p = new Persona(nombre, documento, fechaNacimiento, direccion,
 				localidad, cp, provinciaId, email, telefono,comunicaciones,fechaAlta,
@@ -160,7 +165,7 @@ public class PersonasServlet extends HttpServlet {
 		direccion = request.getParameter("direccion");
 		localidad = request.getParameter("localidad");
 		cp = request.getParameter("cp");
-		provinciaId = request.getParameter("provinciaID");
+		provinciaId = Integer.parseInt(request.getParameter("provinciaID"));
 		email = request.getParameter("email");
 		telefono = request.getParameter("telefono");
 		comunicaciones = request.getParameter("comunicaciones");

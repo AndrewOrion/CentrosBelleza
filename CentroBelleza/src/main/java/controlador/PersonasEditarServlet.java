@@ -2,26 +2,30 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 import dao.PersonaDAO;
 import dao.PersonaDAOMySQL;
+import dao.ProvinciaDAO;
+import dao.ProvinciaDAOMySQL;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import modelo.Persona;
+import modelo.Provincia;
+
 
 /**
  * Servlet implementation class PersonasEditServlet
  */
-//@WebServlet({ "/PersonasEditServlet", "/personasEdit" })
+
 @WebServlet(
-	    name = "PersonasEditServlet", 
-	    urlPatterns = {"/PersonasEditServlet"}
+	    name = "PersonasEditarServlet", 
+	    urlPatterns = {"/PersonasEditarServlet"}
 	)
-public class PersonasEditar extends HttpServlet {
+public class PersonasEditarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
@@ -30,7 +34,7 @@ public class PersonasEditar extends HttpServlet {
 	String direccion;
 	String localidad;
 	String cp;
-	String provinciaId;
+	int provinciaId;
 	String email;
 	String telefono;
 	String comunicaciones;
@@ -41,7 +45,7 @@ public class PersonasEditar extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersonasEditar() {
+    public PersonasEditarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -86,7 +90,10 @@ public class PersonasEditar extends HttpServlet {
 		}else {
 			activoEstado="";
 		}
+		String estado ="";
 		
+		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
+		List<Provincia> listaProvincia = listaProvinciaDAO.getListaProvincias();
 		
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -114,6 +121,10 @@ public class PersonasEditar extends HttpServlet {
 				+ "            <input type=\"text\" name=\"documento\" id=\"documento\"  pattern=\"[0-9]{8}[A-Za-z]{1}\"  value='"+documento+"'>\n"
 				+ "        </div>");
 		out.println("<div>\n"
+				+ "            <label for=\"fechaNacimiento\">Fecha Nacimiento:</label>\n"
+				+ "            <input type=\"text\" name=\"fechaNacimiento\" id=\"fechaNacimiento\" value='"+fechaNacimiento+"'>\n"
+				+ "        </div>");
+		out.println("<div>\n"
 				+ "            <label for=\"direccion\">Direccion:</label>\n"
 				+ "            <input type=\"text\" name=\"direccion\" id=\"direccion\" value='"+direccion+"'>\n"
 				+ "        </div>");
@@ -127,11 +138,17 @@ public class PersonasEditar extends HttpServlet {
 				+ "        </div>");
 		out.println("<div>\n"
 				+ "            <label for=\"provinciaId\">Provincia:</label>\n"
-				+ "            <select name=provinciaId id=\"provinciaId\">\n"
-				+ "                <option value=\"1\">Montilla</option>\n"
-				+ "                <option value=\"6\">Granada</option>\n"
-				+ "                <option value=\"3\">Almeria</option>\n"
-				+ "            </select>\n"
+				+ "            <select name=provinciaId id=\"provinciaId\">\n");
+				for (Provincia p1:listaProvincia) {
+					if(p1.getId()==provinciaId) {
+						estado="selected";
+					}else {
+						estado="";
+					}
+					System.out.println(p1.getId());
+					out.println("<option value='"+p1.getId()+"' "+estado+">"+p1.getNombre()+"</option>");
+				}
+				out.println("</select>\n"
 				+ "        </div>");
 		out.println("<div>\n"
 				+ "            <label for=\"email\">Email:</label>\n"
@@ -139,7 +156,7 @@ public class PersonasEditar extends HttpServlet {
 				+ "        </div>");
 		out.println("<div>\n"
 				+ "            <label for=\"telefono\">Telefono:</label>\n"
-				+ "            <input type=\"text\" name=\"telefono\" id=\"telefono\" pattern=\"[0-9]{8}\" value='"+telefono+"'>\n"
+				+ "            <input type=\"text\" name=\"telefono\" id=\"telefono\"  value='"+telefono+"'>\n"
 				+ "        </div>");
 		out.println("<div>\n"
 				+ "            <label for=\"comunicaciones\">Comunicaciones:</label>\n"

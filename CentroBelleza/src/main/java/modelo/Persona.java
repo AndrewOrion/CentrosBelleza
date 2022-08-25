@@ -18,21 +18,19 @@ public class Persona {
 	private String direccion;
 	private String localidad;
 	private String cp;
-	private String provinciaID;
+	private int provinciaId;
 	private String email;
 	private String telefono;
 	private String comunicaciones;
 	private String fechaAlta;
 	private String ip;
 	private boolean activo;
-	private String provinciaId;
-	
 	public Persona() {
 		
 	}
 	
 	public Persona(String id, String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
-			String cp, String provinciaID, String email, String telefono, String comunicaciones, String fechaAlta,
+			String cp, int provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
 			String ip, boolean activo) {
 		super();
 		this.id = id;
@@ -42,7 +40,7 @@ public class Persona {
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.cp = cp;
-		this.provinciaID = provinciaID;
+		this.provinciaId = provinciaId;
 		this.email = email;
 		this.telefono = telefono;
 		this.comunicaciones = comunicaciones;
@@ -52,7 +50,7 @@ public class Persona {
 	}
 	
 	public Persona(String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
-			String cp, String provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
+			String cp, int provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
 			String ip, boolean activo) {
 		super();
 		this.nombre = nombre;
@@ -126,11 +124,11 @@ public class Persona {
 		this.cp = cp;
 	}
 
-	public String getProvinciaId() {
+	public int getProvinciaId() {
 		return provinciaId;
 	}
 
-	public void setProvinciaId(String provinciaId) {
+	public void setProvinciaId(int provinciaId) {
 		this.provinciaId = provinciaId;
 	}
 
@@ -203,7 +201,7 @@ public class Persona {
 	public String toString() {
 		return "Persona [ID=" + id + ", nombre=" + nombre + ", documento=" + documento + ", fechaNacimiento="
 				+ fechaNacimiento + ", direccion=" + direccion + ", localidad=" + localidad + ", cp=" + cp
-				+ ", provinciaID=" + provinciaID + ", email=" + email + ", telefono=" + telefono + ", comunicaciones="
+				+ ", provinciaId=" + provinciaId + ", email=" + email + ", telefono=" + telefono + ", comunicaciones="
 				+ comunicaciones + ", fechaAlta=" + fechaAlta + ", IP=" + ip + ", activo=" + activo + "]";
 	}
 	

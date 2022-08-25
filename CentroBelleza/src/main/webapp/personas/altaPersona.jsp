@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="dao.ProvinciaDAOMySQL"%>
+<%@page import="dao.ProvinciaDAO"%>
+<%@page import="modelo.Provincia"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +16,10 @@
 </head>
 <body>
     <h1>Alta de Persona</h1>
+    <%
+		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
+		List<Provincia> listaProvincia = listaProvinciaDAO.getListaProvincias();
+	%>
         <form action="PersonasServlet" method="post">
         <div>
         <input type="hidden" name="opcion" value="insertar"/>
@@ -25,7 +35,7 @@
             <input type="text" name="fechaNacimiento" id="fechaNacimiento" required>
         </div>
         <div>
-            <label for="direccion">Dirección:</label>
+            <label for="direccion">DirecciÃ³n:</label>
             <input type="text" name="direccion" id="direccion" required>
         </div>
         <div>
@@ -36,10 +46,16 @@
             <label for="cp">CP:</label>
             <input type="text" name="cp" id="cp" required>
         </div>
-        <div>
-            <label for="provincia">Provincia:</label>
-            <select name="provincia" id="provincia">
-                <option value="autonomo">Autónomo</option>
+         <div>
+            <label for="provinciaId">Provincia:</label>
+            <select name=provinciaId id="provinciaId">
+            <% 
+				for (Provincia p:listaProvincia) {
+			%>
+                	<option value="<%= p.getId() %>"><%= p.getNombre() %></option>
+            <%
+				}
+			%>
             </select>
         </div>
         <div>
@@ -47,7 +63,7 @@
             <input type="email" name="email" id="email">
         </div>
         <div>
-            <label for="telefono">Teléfono:</label>
+            <label for="telefono">TelÃ©fono:</label>
             <input type="text" name="telefono" id="telefono">
         </div>
         <div>

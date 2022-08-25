@@ -29,7 +29,7 @@ public class PersonasModificarServlet extends HttpServlet {
 	String direccion;
 	String localidad;
 	String cp;
-	String provinciaId;
+	int provinciaId;
 	String email;
 	String telefono;
 	String comunicaciones;
@@ -61,13 +61,14 @@ public class PersonasModificarServlet extends HttpServlet {
 		//doGet(request, response);
 		
 		PrintWriter out = response.getWriter();
+		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		documento = request.getParameter("documento");
 		fechaNacimiento = request.getParameter("fechaNacimiento");
 		direccion = request.getParameter("direccion");
 		localidad = request.getParameter("localidad");
 		cp = request.getParameter("cp");
-		provinciaId = request.getParameter("provinciaID");
+		provinciaId = Integer.parseInt(request.getParameter("provinciaId"));
 		email = request.getParameter("email");
 		telefono = request.getParameter("telefono");
 		comunicaciones = request.getParameter("comunicaciones");
@@ -91,11 +92,13 @@ public class PersonasModificarServlet extends HttpServlet {
 				+ "</head>\r\n"
 				+ "<body>");
 		
-		out.println("<h1>Peronsa modificada Correctamente</h1>");
+		out.println("<h1>Persona modificada Correctamente</h1>");
 		out.println("<h2>Datos de la Persona</h2>");
 		out.println("<ul>");
 		out.println("<li>Id: "+id+"</li>");
 		out.println("<li>Nombre: "+nombre+"</li>");
+		out.println("<li>Documento: "+documento+"</li>");
+		out.println("<li>Fecha Nacimiento: "+fechaNacimiento+"</li>");		
 		out.println("<li>Direccion: "+direccion+"</li>");
 		out.println("<li>Localidad: "+localidad+"</li>");
 		out.println("<li>CP: "+cp+"</li>");
@@ -112,7 +115,7 @@ public class PersonasModificarServlet extends HttpServlet {
 		out.println("</body>\r\n"
 				+ "</html>");
 		
-		Persona p = new Persona(nombre, documento, fechaNacimiento, direccion,
+		Persona p = new Persona(id, nombre, documento, fechaNacimiento, direccion,
 				localidad, cp, provinciaId, email, telefono,comunicaciones,fechaAlta,
 				ip,activo);
 		
@@ -120,6 +123,8 @@ public class PersonasModificarServlet extends HttpServlet {
 		actualizarDAO.modificarPersona(p);
 		
 		System.out.println(p);
+		
+
 	}
 
 }

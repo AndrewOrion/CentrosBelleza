@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import modelo.Libro;
 import modelo.Persona;
 import utilidades.ConexionBD;
 
@@ -41,7 +40,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 				String direccion = resultado.getString("direccion");
 				String localidad = resultado.getString("localidad");
 				String cp = resultado.getString("cp");
-				String provinciaID = resultado.getString("provinciaId");
+				int provinciaID = resultado.getInt("provinciaId");
 				String email = resultado.getString("email");
 				String telefono = resultado.getString("telefono");
 				String comunicaciones = resultado.getString("comunicaciones");
@@ -91,7 +90,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 				String direccion = resultado.getString("direccion");
 				String localidad = resultado.getString("localidad");
 				String cp = resultado.getString("cp");
-				String provinciaID = resultado.getString("provinciaId");
+				int provinciaID = resultado.getInt("provinciaId");
 				String email = resultado.getString("email");
 				String telefono = resultado.getString("telefono");
 				String comunicaciones = resultado.getString("comunicaciones");
@@ -165,7 +164,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			consultaPreparada.setString(5, a.getDireccion());
 			consultaPreparada.setString(6, a.getLocalidad());
 			consultaPreparada.setString(7, a.getCp());
-			consultaPreparada.setString(8, a.getProvinciaId());
+			consultaPreparada.setInt(8, a.getProvinciaId());
 			consultaPreparada.setString(9, a.getEmail());
 			consultaPreparada.setString(10, a.getTelefono());
 			consultaPreparada.setString(11, a.getComunicaciones());
@@ -220,7 +219,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			consultaPreparada.setString(4, persona.getDireccion());
 			consultaPreparada.setString(5, persona.getLocalidad());
 			consultaPreparada.setString(6, persona.getCp());
-			consultaPreparada.setString(7, persona.getProvinciaId());
+			consultaPreparada.setInt(7, persona.getProvinciaId());
 			consultaPreparada.setString(8, persona.getEmail());
 			consultaPreparada.setString(9, persona.getTelefono());
 			consultaPreparada.setString(10, persona.getComunicaciones());

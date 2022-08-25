@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class ConexionBD {
 
-	private static final String database = "centrosBelleza";
+	private static final String database = "centroBelleza";
 	private static final String usuario = "root";
 	private static final String contrasena = "";
 	private static final String url="jdbc:mysql://localhost/"+database;

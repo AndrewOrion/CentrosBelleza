@@ -3,19 +3,28 @@
 <%@page import="dao.PersonaDAOMySQL"%>
 <%@page import="dao.PersonaDAO"%>
 <%@page import="modelo.Persona"%>
+<%@page import="dao.ProvinciaDAOMySQL"%>
+<%@page import="dao.ProvinciaDAO"%>
+<%@page import="modelo.Provincia"%>
 <%@page import="java.util.List" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
 <style>
 .img1 {
-width:90%;
+width:19%;
+display-block:center;
 
 }
-.img3 {
-width:60%;
-}
+
 </style>
 <link rel="stylesheet" type="text/css" href="estilo.css">
 
-
+</head>
+<body>
 <h1>Listado de Personas</h1>
 <%
 PersonaDAO pDAO = new PersonaDAOMySQL();
@@ -43,9 +52,12 @@ List<Persona> lista = pDAO.getListaPersonas();
 		<th>Fecha alta</th>
 		<th>IP</th>
 		<th>Activo</th>
+		<th>Editar</th>
+		<th>Eliminar</th>
 	</tr>
 	<%
 	for (Persona a:lista) {
+		System.out.println(a);
 	%>
 			<tr>
 				<td><%=a.getId() %></td>
@@ -62,16 +74,19 @@ List<Persona> lista = pDAO.getListaPersonas();
 				<td><%=a.getFechaAlta() %></td>
 				<td><%=a.getIp() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="PersonasEditar" method="post"><button type="submit" name="idPersona" value='<%=a.getId() %>'>Actualizar</button></form></td>
+				<td><form action="PersonasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'>Actualizar</button></form></td>
 				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
 	
 			</tr>
 		
 			<%
-		}
+			}
 }
 	%>
 	</table>
 	
 
-<a href="?opcion=nuevo">Insertar Persona</a>
+<a href="?opcion=nuevo">Nueva Persona</a><br>
+<a href="index.jsp">Menú Principal</a>
+</body>
+</html>
