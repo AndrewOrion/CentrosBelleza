@@ -10,44 +10,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" type="text/css" href="estilo.css">
  
     
     <title>Alta</title>
 </head>
 <body>
+<div class="titulo">
     <h1>Alta de Persona</h1>
+</div>
     <%
 		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
 		List<Provincia> listaProvincia = listaProvinciaDAO.getListaProvincias();
 	%>
-        <form action="PersonasServlet" method="post">
-        <div>
+<div class="formu">
+      <form action="PersonasServlet" method="post">
         <input type="hidden" name="opcion" value="insertar"/>
-            <label for="nombre">Nombre Completo*:</label>
+      <table>
+      <tr>
+      	<td>
+            <label class="text" for="nombre">Nombre Completo*:</label>
+        </td>
+        <td>
             <input type="text" name="nombre" id="nombre" required>
-        </div>
-        <div>
-            <label for="documento">DNI*:</label>
+      	</td>
+      </tr>
+      <tr>
+      	<td> 
+            <label class="text" for="documento">DNI*:</label>
+        </td>
+        <td>
             <input type="text" name="documento" id="documento"  pattern="[0-9]{8}[A-Za-z]{1}" required>
-        </div>
-        <div>
-            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        </td>
+        </tr>
+        <tr>
+         <td>
+            <label class="text" for="fechaNacimiento">Fecha de Nacimiento:</label>
+         </td>
+         <td>
             <input type="text" name="fechaNacimiento" id="fechaNacimiento" required>
-        </div>
-        <div>
-            <label for="direccion">Dirección:</label>
+      	</td>
+      	</tr>
+      	<tr>
+      	 <td> 
+            <label class="text" for="direccion">Dirección:</label>
+         </td>
+         <td>  
             <input type="text" name="direccion" id="direccion" required>
-        </div>
-        <div>
-            <label for="localidad">Localidad:</label>
+        </td>
+        </tr>
+        <tr>
+         <td>
+            <label class="text" for="localidad">Localidad:</label>
+         </td>
+         <td>   
             <input type="text" name="localidad" id="localidad" required>
-        </div>
-        <div>
-            <label for="cp">CP:</label>
+        </td>
+        </tr>
+         <tr>
+         <td>
+            <label class="text" for="cp">CP:</label>
+          </td>
+         <td>    
             <input type="text" name="cp" id="cp" required>
-        </div>
-         <div>
-            <label for="provinciaId">Provincia:</label>
+         </td>
+         </tr>
+         <tr>
+          <td>
+            <label class="text" for="provinciaId">Provincia:</label>
+           </td>
+           <td>
             <select name=provinciaId id="provinciaId">
             <% 
 				for (Provincia p:listaProvincia) {
@@ -57,35 +89,63 @@
 				}
 			%>
             </select>
-        </div>
-        <div>
-            <label for="email">Email:</label>
+     	</td>
+     	</tr>
+     	<tr>
+     	<td>
+            <label class="text" for="email">Email:</label>
+        </td>
+        <td>
             <input type="email" name="email" id="email">
-        </div>
-        <div>
-            <label for="telefono">Teléfono:</label>
+       </td>
+       </tr>
+       <tr>
+       <td>
+            <label class="text" for="telefono">Teléfono:</label>
+       </td>
+       <td>    
             <input type="text" name="telefono" id="telefono">
-        </div>
-        <div>
-            <label for="comunicaciones">Comunicaciones:</label>
+       </td>
+       </tr>
+       <tr>
+       <td>
+            <label class="text" for="comunicaciones">Comunicaciones:</label>
+       </td>
+       <td>    
             <input type="text" name="comunicaciones" id="comunicaciones">
-        </div>
-        <div>
-            <label for="fechaAlta">Fecha Alta:</label>
+        </td>
+        </tr>
+       <tr>
+       <td> 
+            <label class="text" for="fechaAlta">Fecha Alta:</label>
+         </td>
+        <td>   
             <input type="text" name="fechaAlta" id="fechaAlta">
-        </div>
-        <div>
-            <label for="ip">IP:</label>
+       </td>
+       </tr>
+       <tr>
+       <td>
+            <label class="text" for="ip">IP:</label>
+       </td>
+       <td>    
             <input type="text" name="ip" id="ip">
-        </div>
-        <div>
-            <label for="activo">Activo:</label>
+      </td>
+      </tr>
+      <tr>
+      <td>
+            <label class="text" for="activo">Activo:</label>
+      </td>
+      <td>
             <input type="checkbox" name="activo" id="activo">
-          </div>
-        <div>
-            <input type="submit" value="Confirmar">
-        </div>
-    </form>
-	
+      </td>
+      <tr><td></td>
+         <td>   <input type="submit" class="boton" value="Confirmar">
+        </td><td><a href="index.jsp">Menú Principal</a></td></tr>
+</form>  
+</table>
+</div>
+<footer>
+
+</footer>
 </body>
 </html>

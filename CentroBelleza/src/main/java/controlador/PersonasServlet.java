@@ -124,7 +124,7 @@ public class PersonasServlet extends HttpServlet {
 		mostrarListado(request,response); //muestro la lista de nuevo
 			
 		}
-	private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*	private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String id = request.getParameter("ID"); 
 		
@@ -134,7 +134,7 @@ public class PersonasServlet extends HttpServlet {
 		Persona persona = dao.getPersona(id);
 		request.setAttribute("persona",persona);	
 		request.getRequestDispatcher("/personas/editarPersona.jsp").forward(request, response);
-	}
+	}*/
 	
 	
 	

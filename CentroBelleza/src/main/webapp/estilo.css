@@ -12,12 +12,13 @@ header {
 }
 
 footer {
-	background-color: #515151;
+	background-color:#079CB1 ;
 }
 
 footer, header {
 	height: 120px;
 	display: flex;
+	margin-top:100px;
 	align-items: center;
 	padding-left: 50px;
 }
@@ -101,7 +102,7 @@ div>input, div>select {
 	font-weight: bolder;
 }
 
-.fondo {
+.formu {
 	margin: auto;
 	width: 640px;
 	padding: 20px 40px;
@@ -130,17 +131,45 @@ div>input, div>select {
 }
 
 
-.panel {
+.titulo {
 	text-align: center;
 	margin:auto;
 	margin-top:20px;
 	margin-bottom:20px;
 	display: block;
-	
+	background-color:black;
+	color: white;
 }
+.menusub {
+	text-align: left;
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	display: left;
+	
+	width:30%;
+}
+
 .boton {
-	font-size: 19px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	width: 180px;
+	
+	width: 150px;
+}
+.text{
+font-family:»Gill Sans», «Gill Sans MT», «Myriad Pro», «DejaVu Sans Condensed», Helvetica, Arial, sans-serif;
+font-size:22px;
+}
+
+body{
+	background-color:#F4FEFE;
+}
+.recuadro{
+border-radius: 7px; /* Esquinas redondeadas*/
+border:thin 1px;
+border-color:#e71e1e;
+font-family:»Gill Sans», «Gill Sans MT», «Myriad Pro», «DejaVu Sans Condensed», Helvetica, Arial, sans-serif;
+}
+.all{
+background-color: #e71e1e;
+color:#FFFFFF;
+border-radius: 7px;
 }

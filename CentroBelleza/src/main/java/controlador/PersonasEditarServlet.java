@@ -101,43 +101,49 @@ public class PersonasEditarServlet extends HttpServlet {
 				+ "    <meta charset=\"UTF-8\">\r\n"
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+				+ " <link rel='stylesheet' type='text/css' href='estilo.css'>"
 				+ "    <title>CRUD de Persona - Actualizar</title>\r\n"
 				+ "</head>\r\n"
 				+ "<body>");
 		
+		out.println("<div class='titulo'>");
+
 		out.println("<h1>Actualice Persona</h1>");
-		out.println("<h2>Datos de la Persona:</h2>");
+		out.println("</div>");
+		out.println("<div class='formu'>");
+
 		out.println("<form action=\"PersonasModificarServlet\" method=\"post\">");
-		out.println("<div>\n"
-				+ "            <label for=\"id\">ID:</label>\n"
-				+ "            <input type=\"text\" name=\"id\" id=\"id\" value='"+id+"' readonly>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"nombre\">Nombre:</label>\n"
-				+ "            <input type=\"text\" name=\"nombre\" id=\"nombre\" value='"+nombre+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"documento\">Documento:</label>\n"
-				+ "            <input type=\"text\" name=\"documento\" id=\"documento\"  pattern=\"[0-9]{8}[A-Za-z]{1}\"  value='"+documento+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"fechaNacimiento\">Fecha Nacimiento:</label>\n"
-				+ "            <input type=\"text\" name=\"fechaNacimiento\" id=\"fechaNacimiento\" value='"+fechaNacimiento+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"direccion\">Direccion:</label>\n"
-				+ "            <input type=\"text\" name=\"direccion\" id=\"direccion\" value='"+direccion+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"localidad\">Localidad:</label>\n"
-				+ "            <input type=\"text\" name=\"localidad\" id=\"localidad\" value='"+localidad+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"cp\">CP:</label>\n"
-				+ "            <input type=\"text\" name=\"cp\" id=\"cp\" value='"+cp+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"provinciaId\">Provincia:</label>\n"
+		out.println("<table>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"id\">ID:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"id\" id=\"id\" value='"+id+"' readonly></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"nombre\">Nombre:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"nombre\" id=\"nombre\" value='"+nombre+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"documento\">Documento:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"documento\" id=\"documento\"  pattern=\"[0-9]{8}[A-Za-z]{1}\"  value='"+documento+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"fechaNacimiento\">Fecha Nacimiento:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"fechaNacimiento\" id=\"fechaNacimiento\" value='"+fechaNacimiento+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"direccion\">Direccion:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"direccion\" id=\"direccion\" value='"+direccion+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"localidad\">Localidad:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"localidad\" id=\"localidad\" value='"+localidad+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"cp\">CP:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"cp\" id=\"cp\" value='"+cp+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"provinciaId\">Provincia:</label></td><td>\n"
 				+ "            <select name=provinciaId id=\"provinciaId\">\n");
 				for (Provincia p1:listaProvincia) {
 					if(p1.getId()==provinciaId) {
@@ -145,38 +151,41 @@ public class PersonasEditarServlet extends HttpServlet {
 					}else {
 						estado="";
 					}
-					System.out.println(p1.getId());
+					//System.out.println(p1.getId());
 					out.println("<option value='"+p1.getId()+"' "+estado+">"+p1.getNombre()+"</option>");
 				}
 				out.println("</select>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"email\">Email:</label>\n"
-				+ "            <input type=\"email\" name=\"email\" id=\"email\" value='"+email+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"telefono\">Telefono:</label>\n"
-				+ "            <input type=\"text\" name=\"telefono\" id=\"telefono\"  value='"+telefono+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"comunicaciones\">Comunicaciones:</label>\n"
-				+ "            <input type=\"text\" name=\"comunicaciones\" id=\"comunicaciones\" value='"+comunicaciones+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"fechaALta\">Fecha Alta:</label>\n"
-				+ "            <input type=\"text\" name=\"fechaAlta\" id=\"fechaAlta\" value='"+fechaAlta+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"ip\">IP:</label>\n"
-				+ "            <input type=\"text\" name=\"ip\" id=\"ip\" value='"+ip+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"activo\">Activo:</label>\n"
-				+ "            <input type=\"checkbox\" name=\"activo\" id=\"activo\" "+activoEstado+">\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <input type=\"submit\" value=\"Confirmar\">\n"
-				+ "        </div>");
+				+ "    </td>    </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"email\">Email:</label></td><td>\n"
+				+ "            <input type=\"email\" name=\"email\" id=\"email\" value='"+email+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"telefono\">Telefono:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"telefono\" id=\"telefono\"  value='"+telefono+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"comunicaciones\">Comunicaciones:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"comunicaciones\" id=\"comunicaciones\" value='"+comunicaciones+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"fechaALta\">Fecha Alta:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"fechaAlta\" id=\"fechaAlta\" value='"+fechaAlta+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"ip\">IP:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"ip\" id=\"ip\" value='"+ip+"'></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"activo\">Activo:</label></td><td>\n"
+				+ "            <input type=\"checkbox\" name=\"activo\" id=\"activo\" "+activoEstado+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <input type=\"submit\" class=\"boton\" value=\"Confirmar\"></td>\n"
+				+ "        </tr>");
+		out.println("</table>");
+		out.println("</div>");
+
 		out.println("</form>");
 		out.println("<a href='index.jsp'>Volver</a>");
 		
