@@ -13,14 +13,6 @@
 <head>
 
 
-<style>
-.img1 {
-width:19%;
-display-block:center;
-
-}
-
-</style>
 <link rel="stylesheet" type="text/css" href="estilo.css">
 
 </head>

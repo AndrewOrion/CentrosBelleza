@@ -1,8 +1,13 @@
 package controlador;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
 import dao.ServicioDAO;
 import dao.ServicioDAOMySQL;
@@ -23,7 +28,7 @@ public class ServiciosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
-	String foto;
+	Blob foto;
 	double precio;
 	int puntos;
 	boolean activo;
@@ -72,7 +77,17 @@ public class ServiciosServlet extends HttpServlet {
 		
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
-		foto = request.getParameter("foto");
+        java.sql.Blob foto=null;
+		
+		FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
+		byte[] imageInBytes = IOUtils.toByteArray(myStream);
+
+		try {
+			foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		precio = Double.parseDouble(request.getParameter("precio"));
 		puntos = Integer.parseInt(request.getParameter("puntos"));		
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
@@ -135,7 +150,17 @@ public class ServiciosServlet extends HttpServlet {
 		
 		
 		nombre = request.getParameter("nombre");
-		foto = request.getParameter("foto");
+		  java.sql.Blob foto=null;
+			
+			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
+			byte[] imageInBytes = IOUtils.toByteArray(myStream);
+
+			try {
+				foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		precio = Double.parseDouble(request.getParameter("precio"));
 		puntos = Integer.parseInt(request.getParameter("puntos"));		
 		activo = Boolean.parseBoolean(request.getParameter("activo"));

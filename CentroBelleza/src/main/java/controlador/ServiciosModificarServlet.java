@@ -1,11 +1,15 @@
 package controlador;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.sql.SQLException;
 
+import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
-import dao.ServicioDAOMySQL;
 import dao.ServicioDAO;
+import dao.ServicioDAOMySQL;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +30,7 @@ public class ServiciosModificarServlet extends HttpServlet {
 
 	String id;
 	String nombre;
-	String foto;
+	Blob foto;
 	double precio;
 	int puntos;
 	boolean activo;
@@ -57,9 +61,19 @@ public class ServiciosModificarServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
-		foto = request.getParameter("foto");
-		precio = Double.parseDouble("puntos"); 
-		puntos = Integer.parseInt("precio"); 
+		  java.sql.Blob foto=null;
+			
+			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
+			byte[] imageInBytes = IOUtils.toByteArray(myStream);
+
+			try {
+				foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		precio = Double.parseDouble(request.getParameter("precio")); 
+		puntos = Integer.parseInt(request.getParameter("puntos")); 
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
 		boolean activo=false;

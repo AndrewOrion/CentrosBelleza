@@ -48,7 +48,7 @@
             <label class="text" for="fechaNacimiento">Fecha de Nacimiento:</label>
          </td>
          <td>
-            <input type="text" name="fechaNacimiento" id="fechaNacimiento" required>
+            <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
       	</td>
       	</tr>
       	<tr>
@@ -120,7 +120,7 @@
             <label class="text" for="fechaAlta">Fecha Alta:</label>
          </td>
         <td>   
-            <input type="text" name="fechaAlta" id="fechaAlta">
+            <input type="date" name="fechaAlta" id="fechaAlta">
        </td>
        </tr>
        <tr>

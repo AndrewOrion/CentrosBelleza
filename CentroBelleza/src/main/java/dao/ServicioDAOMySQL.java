@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			
 				String id = resultado.getString("id");
 				String nombre = resultado.getString("nombre");
-				String foto = resultado.getString("foto");
+				Blob foto = resultado.getBlob("foto");
 				double precio = resultado.getDouble("precio");
 				int puntos = resultado.getInt("puntos");
 				boolean activo = resultado.getBoolean("activo");
@@ -74,9 +75,9 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			
 			// Bucle para recorrer todas las filas que devuelve la consulta
 			if (resultado.next()) {
-				String id1 = resultado.getString("id");
+				
 				String nombre = resultado.getString("nombre");
-				String foto = resultado.getString("foto");
+				Blob foto = resultado.getBlob("foto");
 				double precio = resultado.getDouble("precio");
 				int puntos = resultado.getInt("puntos");				
 				boolean activo = resultado.getBoolean("activo");
@@ -142,7 +143,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			
 			consultaPreparada.setString(1, a.getId());
 			consultaPreparada.setString(2, a.getNombre());
-			consultaPreparada.setString(3, a.getFoto());
+			consultaPreparada.setBlob(3, a.getFoto());
 			consultaPreparada.setDouble(4, a.getPrecio());
 			consultaPreparada.setInt(5, a.getPuntos());
 			consultaPreparada.setBoolean(6, a.isActivo());
@@ -174,25 +175,18 @@ public class ServicioDAOMySQL implements ServicioDAO {
 		try {
 			consultaPreparada = con.prepareStatement("UPDATE servicios "
 					+ "SET nombre=?, "
-					+ "documento=?, "
-					+ "fechaNacimiento=?, "
-					+ "direccion=?, "
-					+ "localidad=?, "
-					+ "cp=?, "
-					+ "provinciaID=?, "
-					+ "email=?, "
-					+ "telefono=?, "
-					+ "comunicaciones=?, "
-					+ "fechaAlta=?, "
-					+ "IP=?, "
+					+ "foto=?, "
+					+ "precio=?, "
+					+ "puntos=?, "
 					+ "activo=? "
 					+ "WHERE ID=?");
 			
 			consultaPreparada.setString(1, servicio.getNombre());
-			consultaPreparada.setString(2, servicio.getFoto());
+			consultaPreparada.setBlob(2, servicio.getFoto());
 			consultaPreparada.setDouble(3, servicio.getPrecio());
 			consultaPreparada.setInt(4, servicio.getPuntos());
 			consultaPreparada.setBoolean(5, servicio.isActivo());
+			consultaPreparada.setString(6, servicio.getId());
 
 			resultado=consultaPreparada.executeUpdate();
 

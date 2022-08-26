@@ -14,7 +14,11 @@ header {
 footer {
 	background-color:#079CB1 ;
 }
+.img1 {
+width:19%;
+display:block;
 
+}
 footer, header {
 	height: 120px;
 	display: flex;

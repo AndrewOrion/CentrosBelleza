@@ -2,18 +2,19 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import dao.ServicioDAO;
 import dao.ServicioDAOMySQL;
-
+import modelo.Provincia;
 import modelo.Servicio;
 
 /**
@@ -29,7 +30,7 @@ public class ServiciosEditarServlet extends HttpServlet {
 
 	String id;
 	String nombre;
-	String foto;
+	Blob foto;
 	double precio;
 	int puntos;
 	boolean activo;
@@ -84,44 +85,55 @@ public class ServiciosEditarServlet extends HttpServlet {
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
 				+ "    <title>CRUD de Servicios - Actualizar</title>\r\n"
+				+ " <link rel='stylesheet' type='text/css' href='estilo.css'>"
 				+ "</head>\r\n"
 				+ "<body>");
 		
+		out.println("<div class='titulo'>");
+
 		out.println("<h1>Actualice Servicio</h1>");
-		out.println("<h2>Datos de la Persona:</h2>");
+		out.println("</div>");
+		out.println("<div class='formu'>");
 		out.println("<form action=\"ServiciosModificarServlet\" method=\"post\">");
-		out.println("<div>\n"
-				+ "            <label for=\"id\">ID:</label>\n"
-				+ "            <input type=\"text\" name=\"id\" id=\"id\" value='"+id+"' readonly>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"nombre\">Nombre:</label>\n"
-				+ "            <input type=\"text\" name=\"nombre\" id=\"nombre\" value='"+nombre+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"foto\">Foto:</label>\n"
-				+ "            <input type=\"text\" name=\"foto\" id=\"foto\" value='"+foto+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"precio\">Precio:</label>\n"
-				+ "            <input type=\"text\" name=\"precio\" id=\"precio\" value='"+precio+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"puntos\">Puntos:</label>\n"
-				+ "            <input type=\"text\" name=\"puntos\" id=\"puntos\" value='"+puntos+"'>\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <label for=\"activo\">Activo:</label>\n"
-				+ "            <input type=\"checkbox\" name=\"activo\" id=\"activo\" "+activoEstado+">\n"
-				+ "        </div>");
-		out.println("<div>\n"
-				+ "            <input type=\"submit\" value=\"Confirmar\">\n"
-				+ "        </div>");
+		out.println("<table>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"id\">id:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"id\" id=\"id\" "+id+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"nombre\">Nombre:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"nombre\" id=\"nombre\" "+nombre+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"foto\">Foto:</label></td><td>\n"
+				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" "+foto+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"precio\">Precio:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"precio\" id=\"precio\" "+precio+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"puntos\">Puntos:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"puntos\" id=\"puntos\" "+puntos+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <label class=\"text\" for=\"activo\">Activo:</label></td><td>\n"
+				+ "            <input type=\"checkbox\" name=\"activo\" id=\"activo\" "+activoEstado+"></td>\n"
+				+ "        </tr>");
+		out.println("<tr><td>\n"
+				+ "            <input type=\"submit\" class=\"boton\" value=\"Confirmar\"></td>\n"
+				+ "        </tr>");
+		out.println("</table>");
+
 		out.println("</form>");
+		out.println("</div>");
+
 		out.println("<a href='index.jsp'>Volver</a>");
 		
 		out.println("</body>\r\n"
 				+ "</html>");
+		
+
 		
 		
 		
