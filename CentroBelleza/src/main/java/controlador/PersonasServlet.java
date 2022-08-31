@@ -41,8 +41,13 @@ public class PersonasServlet extends HttpServlet {
 	String comunicaciones;
 	String fechaAlta;
 	String ip;
-	boolean activo;
+	String a;
 	String opcion;
+	boolean activo;
+	
+	
+	
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -64,10 +69,6 @@ public class PersonasServlet extends HttpServlet {
 			mostrarFormularioAlta(request,response);
 		} else if (opcion.equals("eliminar")) {
 			eliminarPersona(request,response);
-		}else if (opcion.equals("editar")) {
-			System.out.println(opcion);;
-		}else if (opcion.equals("modificar")) {
-			modificarPersona(request,response);
 		}
 	}
 	/**
@@ -77,8 +78,6 @@ public class PersonasServlet extends HttpServlet {
 		opcion = request.getParameter("opcion");
 		if (opcion.equals("insertar")) {
 			insertarPersona(request,response);
-		}else if (opcion.equals("modificar")) {
-			modificarPersona(request,response);
 		}
 	}
 		
@@ -99,6 +98,9 @@ public class PersonasServlet extends HttpServlet {
 		fechaAlta = request.getParameter("fechaAlta");
 		ip = request.getParameter("ip");
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
+		
+		
+		System.out.println(activo);
 		
 		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
 		Provincia pro= listaProvinciaDAO.getProvincia(provinciaId);
@@ -124,18 +126,6 @@ public class PersonasServlet extends HttpServlet {
 		mostrarListado(request,response); //muestro la lista de nuevo
 			
 		}
-/*	private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id = request.getParameter("ID"); 
-		
-		PersonaDAO dao = new PersonaDAOMySQL();
-		
-		
-		Persona persona = dao.getPersona(id);
-		request.setAttribute("persona",persona);	
-		request.getRequestDispatcher("/personas/editarPersona.jsp").forward(request, response);
-	}*/
-	
 	
 	
 	
@@ -156,33 +146,5 @@ public class PersonasServlet extends HttpServlet {
 		mostrarListado(request,response); //muestro la lista de nuevo
 		
 	}
-	
-    private void modificarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		nombre = request.getParameter("nombre");
-		documento = request.getParameter("documento");
-		fechaNacimiento = request.getParameter("fechaNacimiento");
-		direccion = request.getParameter("direccion");
-		localidad = request.getParameter("localidad");
-		cp = request.getParameter("cp");
-		provinciaId = Integer.parseInt(request.getParameter("provinciaID"));
-		email = request.getParameter("email");
-		telefono = request.getParameter("telefono");
-		comunicaciones = request.getParameter("comunicaciones");
-		fechaAlta = request.getParameter("fechaAlta");
-		ip = request.getParameter("ip");
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
-		
-		Persona persona = new Persona(nombre, documento, fechaNacimiento, direccion,
-				localidad, cp, provinciaId, email, telefono,comunicaciones,fechaAlta,
-				ip,activo);
-		
-		PersonaDAO dao = new PersonaDAOMySQL();
-		dao.modificarPersona(persona);
-		mostrarListado(request, response);
-		
-	}
-    
-   
 	
 }

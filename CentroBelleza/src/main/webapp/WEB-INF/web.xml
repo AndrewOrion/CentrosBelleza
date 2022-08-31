@@ -14,10 +14,6 @@
     <servlet-class>controlador.PersonasServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>ServiciosServlet</servlet-name>
-    <servlet-class>controlador.ServiciosServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>PersonasEditarServlet</servlet-name>
     <servlet-class>controlador.PersonasEditarServlet</servlet-class>
   </servlet>
@@ -25,19 +21,11 @@
     <servlet-name>PersonasModificarServlet</servlet-name>
     <servlet-class>controlador.PersonasModificarServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>ServiciosModificarServlet</servlet-name>
-    <servlet-class>controlador.ServiciosModificarServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
+ <servlet-mapping>
     <servlet-name>PersonasServlet</servlet-name>
     <url-pattern>/PersonasServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ServiciosServlet</servlet-name>
-    <url-pattern>/ServiciosServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
+ <servlet-mapping>
     <servlet-name>PersonasEditarServlet</servlet-name>
     <url-pattern>/PersonasEditarServlet</url-pattern>
   </servlet-mapping>
@@ -45,16 +33,53 @@
     <servlet-name>PersonasModificarServlet</servlet-name>
     <url-pattern>/PersonasModificarServlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
+
+  <servlet>
+    <servlet-name>ServiciosServlet</servlet-name>
+    <servlet-class>controlador.ServiciosServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>ServiciosModificarServlet</servlet-name>
-    <url-pattern>/ServiciosModificarServlet</url-pattern>
-  </servlet-mapping>
-<servlet>
+    <servlet-class>controlador.ServiciosModificarServlet</servlet-class>
+  </servlet>
+ <servlet>
     <servlet-name>ServiciosEditarServlet</servlet-name>
     <servlet-class>controlador.ServiciosEditarServlet</servlet-class>
   </servlet>
   <servlet-mapping>
+    <servlet-name>ServiciosServlet</servlet-name>
+    <url-pattern>/ServiciosServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServiciosModificarServlet</servlet-name>
+    <url-pattern>/ServiciosModificarServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>ServiciosEditarServlet</servlet-name>
     <url-pattern>/ServiciosEditarServlet</url-pattern>
+  </servlet-mapping>  
+<servlet>
+<servlet-name>CategoriasServlet</servlet-name>
+    <servlet-class>controlador.CategoriasServlet</servlet-class>
+</servlet>
+ <servlet-mapping>
+    <servlet-name>CategoriasServlet</servlet-name>
+    <url-pattern>/CategoriasServlet</url-pattern>
+ </servlet-mapping>
+<servlet>
+ <servlet-name>CategoriasEditarServlet</servlet-name>
+ <servlet-class>controlador.CategoriasEditarServlet</servlet-class>
+ </servlet>
+<servlet-mapping>
+    <servlet-name>CategoriasEditarServlet</servlet-name>
+    <url-pattern>/CategoriasEditarServlet</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>CategoriasModificarServlet</servlet-name>
+    <servlet-class>controlador.CategoriasModificarServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoriasModificarServlet</servlet-name>
+    <url-pattern>/CategoriasModificarServlet</url-pattern>
   </servlet-mapping>
 </web-app>

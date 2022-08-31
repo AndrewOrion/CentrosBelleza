@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import modelo.Servicio;
+import modelo.Categoria;
 import utilidades.ConexionBD;
 
-public class ServicioDAOMySQL implements ServicioDAO {
+public class CategoriaDAOMySQL implements CategoriaDAO {
 
 	
 	private ConexionBD conexion;
@@ -21,32 +21,32 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	private PreparedStatement consultaPreparada = null;
 	private ResultSet resultado = null;
 	
-	public ServicioDAOMySQL() {
+	public CategoriaDAOMySQL() {
 		conexion = new ConexionBD();
 	}
 
 	@Override
-	public List<Servicio> getListaServicios(){
-		List<Servicio> listaServicios = new ArrayList<Servicio>();
+	public List<Categoria> getListaCategorias(){
+		List<Categoria> listaCategorias = new ArrayList<Categoria>();
 		Connection con = conexion.getConexion();
 		
 		try {
 			consulta = con.createStatement();
-			resultado = consulta.executeQuery("select * from servicios");
+			resultado = consulta.executeQuery("select * from categorias");
 			while (resultado.next()) {
 			
 				String id = resultado.getString("id");
 				String nombre = resultado.getString("nombre");
 				Blob foto = resultado.getBlob("foto");
-				double precio = resultado.getDouble("precio");
-				int puntos = resultado.getInt("puntos");
+				String tipoCategoriaId = resultado.getString("tipoCategoriaId");
+				boolean padre = resultado.getBoolean("padre");
 				boolean activo = resultado.getBoolean("activo");
 				
-				Servicio s = new Servicio(id,nombre, foto, precio, puntos, activo);
-				listaServicios.add(s);
+				Categoria s = new Categoria(id,nombre, foto, tipoCategoriaId , padre, activo);
+				listaCategorias.add(s);
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al realizar la consulta sobre servicios: "+e.getMessage());
+			System.out.println("Error al realizar la consulta sobre Categorias: "+e.getMessage());
 		} finally {
 			try {
 				resultado.close();
@@ -59,16 +59,16 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			}
 		}
 
-		return listaServicios;
+		return listaCategorias;
 	}
 
 	@Override
-	public Servicio getServicio(String id) {
+	public Categoria getCategoria(String id) {
 		Connection con = conexion.getConexion();
-		Servicio s = null;
+		Categoria s = null;
 		
 		try {
-			consultaPreparada = con.prepareStatement("select * from servicios"
+			consultaPreparada = con.prepareStatement("select * from categorias"
 					+ " where ID = ?");
 			consultaPreparada.setString(1, id);
 			resultado=consultaPreparada.executeQuery();
@@ -76,19 +76,19 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			// Bucle para recorrer todas las filas que devuelve la consulta
 			if (resultado.next()) {
 				
+				
 				String nombre = resultado.getString("nombre");
 				Blob foto = resultado.getBlob("foto");
-				double precio = resultado.getDouble("precio");
-				int puntos = resultado.getInt("puntos");				
+				String tipoCategoriaId = resultado.getString("tipoCategoriaId");
+				boolean padre = resultado.getBoolean("padre");
 				boolean activo = resultado.getBoolean("activo");
 				
-				
-				s = new Servicio(id,nombre, foto, precio, puntos, activo);
+				s = new Categoria(id,nombre, foto, tipoCategoriaId, padre, activo);
 				
 				}
 			
 		} catch (SQLException e) {
-			System.out.println("Error al realizar la consulta sobre el servicio: "
+			System.out.println("Error al realizar la consulta sobre la Categoria: "
 		         +e.getMessage());
 		} finally {
 			try {
@@ -105,18 +105,18 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	}
 
 	@Override
-	public int eliminarServicio(String id) {
+	public int eliminarCategoria(String id) {
 		Connection con = conexion.getConexion();
 		int resultado=0;
 		
 		try {
-			consultaPreparada = con.prepareStatement("DELETE FROM servicios WHERE ID = ?");
+			consultaPreparada = con.prepareStatement("DELETE FROM categorias WHERE ID = ?");
 			
 			consultaPreparada.setString(1, id);
 			resultado=consultaPreparada.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("Error al realizar el borrado de servicio: "+e.getMessage());
+			System.out.println("Error al realizar el borrado de Categoria: "+e.getMessage());
 		} finally {
 			try {
 				consulta.close();
@@ -131,25 +131,37 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	}		
 	
 	@Override
-	public int insertarServicio(Servicio a) {
+	public int insertarCategoria(Categoria a) {
 		Connection con = conexion.getConexion();
 		int resultado=0;
-		
+		String activoEstado;
+		String padreEstado;
+		if(a.isActivo()==true) {
+			activoEstado="checked";
+		}else {
+			activoEstado="";
+		}
+		if(a.isPadre()==true) {
+			padreEstado="checked";
+		}else {
+			padreEstado="";
+		}
 		try {
+			
 			consultaPreparada = con.prepareStatement(
-					"insert into servicios values(?,?,?,?,?,?)");
+					"insert into categorias values(?,?,?,?,?,?)");
 			
 			consultaPreparada.setString(1, a.getId());
 			consultaPreparada.setString(2, a.getNombre());
 			consultaPreparada.setBlob(3, a.getFoto());
-			consultaPreparada.setDouble(4, a.getPrecio());
-			consultaPreparada.setInt(5, a.getPuntos());
-			consultaPreparada.setBoolean(6, a.isActivo());
+			consultaPreparada.setString(4, a.getTipoCategoriaId());
+			consultaPreparada.setString(5, padreEstado);
+			consultaPreparada.setString(6, activoEstado);
 			
 			resultado=consultaPreparada.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("Error al insertar servicio: "
+			System.out.println("Error al insertar Categoria: "
 					+e.getMessage());
 		} finally {
 			try {
@@ -166,30 +178,30 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	}
 
 	@Override
-	public int modificarServicio(Servicio servicio) {
+	public int modificarCategoria(Categoria Categoria) {
 		Connection con = conexion.getConexion();
 		PreparedStatement consultaPreparada =null;
 		int resultado=0;
 		try {
-			consultaPreparada = con.prepareStatement("UPDATE servicios "
+			consultaPreparada = con.prepareStatement("UPDATE categorias "
 					+ "SET nombre=?, "
 					+ "foto=?, "
-					+ "precio=?, "
-					+ "puntos=?, "
+					+ "tipoCategoriaId=?, "
+					+ "padre=?, "
 					+ "activo=? "
 					+ "WHERE ID=?");
 			
-			consultaPreparada.setString(1, servicio.getNombre());
-			consultaPreparada.setBlob(2, servicio.getFoto());
-			consultaPreparada.setDouble(3, servicio.getPrecio());
-			consultaPreparada.setInt(4, servicio.getPuntos());
-			consultaPreparada.setBoolean(5, servicio.isActivo());
-			consultaPreparada.setString(6, servicio.getId());
+			consultaPreparada.setString(1, Categoria.getNombre());
+			consultaPreparada.setBlob(2, Categoria.getFoto());
+			consultaPreparada.setString(3, Categoria.getTipoCategoriaId());
+			consultaPreparada.setBoolean(4, Categoria.isPadre());
+			consultaPreparada.setBoolean(5, Categoria.isActivo());
+			consultaPreparada.setString(6, Categoria.getId());
 
 			resultado=consultaPreparada.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("Error al realizar la actualizacion de servicio: "
+			System.out.println("Error al realizar la actualizacion de Categoria: "
 					+e.getMessage());
 		} finally {
 			try {

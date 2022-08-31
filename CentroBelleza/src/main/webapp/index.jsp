@@ -1,48 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <head>
-<style>
-div{
-display:inline;
-
-}
-img {
-width:20%;
-border:20px solid grey;
-border-radius:10px;
-}
-.titulo {
-	text-align: center;
-	margin:auto;
-	margin-top:20px;
-	margin-bottom:20px;
-	display: block;
-	background-color:black;
-	color: white;
-}
-.op{
-width:500px;
-}
-body{
-background-color:#F4FEFE;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="estiloIndex.css">
 </head>
 <html>
 <body>
 <div class="titulo">
-<h1>Salones de Belleza</h1>
+<h1>SALONES DE BELLEZA</h1>
 </div>
-<div class="op">
-	<a href="PersonasServlet"><img class="a" src="personas.png" alt="Personas" /></a>
-</div>
-<div class="op">
-	<a href="Salones"><img class="b" src="salones.webp" alt="Salones" /></a>
-</div>
-<div class="op">
-	<a href="ServiciosServlet"><img class="c" src="servicios.jpg" alt="Servicios" /></a>
-</div>
+<table>
 
+<tr><td><div class="container">
+	<a href="PersonasServlet"><img src="personas.png" class="image"  alt="Personas" /></a>
+	 <div class="middle">
+    <div class="text">PERSONAS</div>
+  </div></div>
+</td><td><div class="container">
+	<a href="SalonesServlet"><img src="salones.webp" class="image"  alt="Salones" /></a>
+	 <div class="middle">
+    <div class="text">SALONES</div>
+  </div></div>
+</td><td><div class="container">
+	<a href="ServiciosServlet"><img src="servicios.jpg" class="image"  alt="Servicios" /></a>
+	 <div class="middle">
+    <div class="text">SERVICIOS</div>
+  </div></div>
+</td><td><div class="container">
+	<a href="CategoriasServlet"><img src="categorias.png" class="image"  alt="Categorias" /></a>
+	 <div class="middle">
+    <div class="text">CATEGORIAS</div>
+  </div></div>
+</td></tr>
+</table>
 </body>
 </html>

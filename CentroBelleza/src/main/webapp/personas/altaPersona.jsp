@@ -26,13 +26,13 @@
 <div class="formu">
       <form action="PersonasServlet" method="post">
         <input type="hidden" name="opcion" value="insertar"/>
-      <table>
+      <table class="table table-striped">
       <tr>
       	<td>
             <label class="text" for="nombre">Nombre Completo*:</label>
         </td>
         <td>
-            <input type="text" name="nombre" id="nombre" required>
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
       	</td>
       </tr>
       <tr>
@@ -40,7 +40,7 @@
             <label class="text" for="documento">DNI*:</label>
         </td>
         <td>
-            <input type="text" name="documento" id="documento"  pattern="[0-9]{8}[A-Za-z]{1}" required>
+            <input type="text" class="form-control" name="documento" id="documento"  pattern="[0-9]{8}[A-Za-z]{1}" required>
         </td>
         </tr>
         <tr>
@@ -48,15 +48,15 @@
             <label class="text" for="fechaNacimiento">Fecha de Nacimiento:</label>
          </td>
          <td>
-            <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+            <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" >
       	</td>
       	</tr>
       	<tr>
       	 <td> 
-            <label class="text" for="direccion">Dirección:</label>
+            <label class="text"for="direccion">Dirección:</label>
          </td>
          <td>  
-            <input type="text" name="direccion" id="direccion" required>
+            <input type="text" class="form-control" name="direccion" id="direccion" required>
         </td>
         </tr>
         <tr>
@@ -64,7 +64,7 @@
             <label class="text" for="localidad">Localidad:</label>
          </td>
          <td>   
-            <input type="text" name="localidad" id="localidad" required>
+            <input type="text" class="form-control" name="localidad" id="localidad" required>
         </td>
         </tr>
          <tr>
@@ -72,7 +72,7 @@
             <label class="text" for="cp">CP:</label>
           </td>
          <td>    
-            <input type="text" name="cp" id="cp" required>
+            <input type="text" class="form-control" name="cp" id="cp" required>
          </td>
          </tr>
          <tr>
@@ -96,7 +96,7 @@
             <label class="text" for="email">Email:</label>
         </td>
         <td>
-            <input type="email" name="email" id="email">
+            <input type="email" class="form-control" name="email" id="email">
        </td>
        </tr>
        <tr>
@@ -104,7 +104,7 @@
             <label class="text" for="telefono">Teléfono:</label>
        </td>
        <td>    
-            <input type="text" name="telefono" id="telefono">
+            <input type="text" class="form-control" name="telefono" id="telefono">
        </td>
        </tr>
        <tr>
@@ -112,7 +112,7 @@
             <label class="text" for="comunicaciones">Comunicaciones:</label>
        </td>
        <td>    
-            <input type="text" name="comunicaciones" id="comunicaciones">
+            <input type="text" class="form-control" name="comunicaciones" id="comunicaciones">
         </td>
         </tr>
        <tr>
@@ -120,7 +120,7 @@
             <label class="text" for="fechaAlta">Fecha Alta:</label>
          </td>
         <td>   
-            <input type="date" name="fechaAlta" id="fechaAlta">
+            <input type="date" class="form-control" name="fechaAlta" id="fechaAlta">
        </td>
        </tr>
        <tr>
@@ -128,7 +128,7 @@
             <label class="text" for="ip">IP:</label>
        </td>
        <td>    
-            <input type="text" name="ip" id="ip">
+            <input type="text" class="form-control" name="ip" id="ip">
       </td>
       </tr>
       <tr>

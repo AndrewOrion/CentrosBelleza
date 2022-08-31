@@ -1,8 +1,8 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page import="dao.ServicioDAOMySQL"%>
-<%@page import="dao.ServicioDAO"%>
-<%@page import="modelo.Servicio"%>
+<%@page import="dao.CategoriaDAOMySQL"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.FileInputStream"%>
 <%@page import="org.apache.tomcat.jakartaee.commons.io.IOUtils"%>
@@ -19,15 +19,15 @@
 </head>
 <body>
 <div class="titulo">
-<h1>Listado de Servicios</h1>
+<h1>Listado de Categorías</h1>
 </div>
 <%
-ServicioDAO pDAO = new ServicioDAOMySQL();
-List<Servicio> lista = pDAO.getListaServicios();
+CategoriaDAO pDAO = new CategoriaDAOMySQL();
+List<Categoria> lista = pDAO.getListaCategorias();
 
    if (lista==null || lista.size()==0) {
 %><div>
-<h2>No hay datos de servicios registrados</h2></div>
+<h2>No hay datos de categorias registrados</h2></div>
 <%
 } else {
 %>
@@ -36,18 +36,21 @@ List<Servicio> lista = pDAO.getListaServicios();
 		<th>ID</th>
 		<th>Nombre</th>
 		<th>Foto</th>
-		<th>Precio</th>
-		<th>Puntos</th>		
+		<th>Tipo Categoría ID</th>
+		<th>Padre</th>		
 		<th>Activo</th>
 		<th>Editar</th>
 		<th>Eliminar</th>
 	</tr>
 	<%
-	for (Servicio a:lista) {
+	for (Categoria a:lista) {
 		java.sql.Blob rs=null;
 		System.out.println(a);
+		
+		
 		if(a.getFoto()!=null){
 			rs=a.getFoto();
+			
 		} 
 		byte[] imageInBytes = IOUtils.toByteArray(a.getFoto().getBinaryStream());
 		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
@@ -57,12 +60,12 @@ List<Servicio> lista = pDAO.getListaServicios();
 				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
 				<td><img width="100px" src="data:image/jpg;base64,<%=img %>" /></td>
-				<td><%=a.getPrecio() %></td>
-				<td><%=a.getPuntos() %></td>
+				<td><%=a.getTipoCategoriaId() %></td>
+				<td><%=a.isPadre() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="ServiciosEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
+				<td><form action="CategoriasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
 				<td>
-				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
+				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
 		
@@ -73,7 +76,7 @@ List<Servicio> lista = pDAO.getListaServicios();
 	</table>
 	
 
-<a href="?opcion=nuevo">Nuevo Servicio</a><br>
+<a href="?opcion=nuevo">Nueva Categoría</a><br>
 <a href="index.jsp">Menú Principal</a>
 </body>
 </html>

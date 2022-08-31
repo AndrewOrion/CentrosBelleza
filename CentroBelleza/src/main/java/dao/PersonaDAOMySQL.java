@@ -170,7 +170,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			consultaPreparada.setString(11, a.getComunicaciones());
 			consultaPreparada.setString(12, a.getFechaAlta());
 			consultaPreparada.setString(13, a.getIp());
-			consultaPreparada.setBoolean(14, a.isActivo());
+			consultaPreparada.setBoolean(14, a.isActivo();
 			
 			resultado=consultaPreparada.executeUpdate();
 
@@ -196,6 +196,8 @@ public class PersonaDAOMySQL implements PersonaDAO {
 		Connection con = conexion.getConexion();
 		PreparedStatement consultaPreparada =null;
 		int resultado=0;
+		System.out.println(persona.isActivo());
+		System.out.println(persona);
 		try {
 			consultaPreparada = con.prepareStatement("UPDATE personas "
 					+ "SET nombre=?, "

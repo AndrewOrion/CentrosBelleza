@@ -8,37 +8,36 @@ import java.sql.SQLException;
 
 import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
-import dao.ServicioDAO;
-import dao.ServicioDAOMySQL;
+import dao.CategoriaDAO;
+import dao.CategoriaDAOMySQL;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Servicio;
+import modelo.Categoria;
 
 
 /**
- * Servlet imparSalon
+ * Servlet implementation class ModificarSalon
  */
 @WebServlet(
-	    name = "ServiciosModificarServlet", 
-	    urlPatterns = {"/ServiciosModificarServlet"}
+	    name = "CategoriasModificarServlet", 
+	    urlPatterns = {"/CategoriasModificarServlet"}
 	)
-public class ServiciosModificarServlet extends HttpServlet {
+public class CategoriasModificarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	String id;
 	String nombre;
 	Blob foto;
-	double precio;
-	int puntos;
+	String tipoCategoriaId;
+	boolean padre;
 	boolean activo;
 	String opcion;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServiciosModificarServlet() {
+    public CategoriasModificarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -63,46 +62,47 @@ public class ServiciosModificarServlet extends HttpServlet {
 		nombre = request.getParameter("nombre");
 		  java.sql.Blob foto=null;
 			
-			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
-			byte[] imageInBytes = IOUtils.toByteArray(myStream);
+				FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
+				byte[] imageInBytes = IOUtils.toByteArray(myStream);
 
-			try {
-				foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		precio = Double.parseDouble(request.getParameter("precio")); 
-		puntos = Integer.parseInt(request.getParameter("puntos")); 
+				try {
+					foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		padre = Boolean.parseBoolean(request.getParameter("activo"));
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
 		boolean activo=false;
+		boolean padre=false;
 		
 		if(request.getParameter("activo") != null) {
 			activo=true;
 		}
+		if(request.getParameter("padre") != null) {
+			padre=true;
+		}
 		
 		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
-		
+
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
 				+ "    <meta charset=\"UTF-8\">\r\n"
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-				+ "    <title>CRUD de Servicio - Servicio</title>\r\n"
+				+ "    <title>CRUD de Categoría - Categoría Insertada</title>\r\n"
 				+ "</head>\r\n"
 				+ "<body>");
 		
-		out.println("<h1>Servicio modificado Correctamente</h1>");
-		out.println("<h2>Datos de servicio</h2>");
+		out.println("<h1>Categoría modificada Correctamente</h1>");
+		out.println("<h2>Datos de la Categoría</h2>");
 		out.println("<ul>");
 		out.println("<li>Id: "+id+"</li>");
 		out.println("<li>Nombre: "+nombre+"</li>");
 		out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
-		out.println("<li>Precio: "+precio+"</li>");
-		out.println("<li>Puntos: "+puntos+"</li>");
-		
+		out.println("<li>activo: "+padre+"</li>");	
 		out.println("<li>activo: "+activo+"</li>");
 		out.println("</ul>");
 		out.println("<a href='index.jsp'>Volver</a>");
@@ -110,12 +110,12 @@ public class ServiciosModificarServlet extends HttpServlet {
 		out.println("</body>\r\n"
 				+ "</html>");
 		
-		Servicio s = new Servicio (id, nombre, foto, precio, puntos, activo);
+		Categoria p = new Categoria(id, nombre, foto, tipoCategoriaId, padre,activo);
 		
-		ServicioDAO actualizarDAO = new ServicioDAOMySQL();
-		actualizarDAO.modificarServicio(s);
+		CategoriaDAO actualizarDAO = new CategoriaDAOMySQL();
+		actualizarDAO.modificarCategoria(p);
 		
-		System.out.println(s);
+		System.out.println(p);
 		
 
 	}

@@ -6,44 +6,42 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
+import dao.CategoriaDAO;
+import dao.CategoriaDAOMySQL;
+import dao.TipoCategoriaIdDAO;
+import dao.TipoCategoriaIdDAOMySQL;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import javax.servlet.annotation.MultipartConfig;
+import modelo.Categoria;
+import modelo.TipoCategoriaId;
 
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
-
-import dao.ServicioDAO;
-import dao.ServicioDAOMySQL;
-import modelo.Provincia;
-import modelo.Servicio;
 
 /**
- * Servlet implementation class ServiciosEditarServlet
+ * Servlet implementation class PersonasEditServlet
  */
 
 @WebServlet(
-	    name = "ServiciosEditarServlet", 
-	    urlPatterns = {"/ServiciosEditarServlet"}
+	    name = "CategoriasEditarServlet", 
+	    urlPatterns = {"/CategoriasEditarServlet"}
 	)
-@MultipartConfig
-public class ServiciosEditarServlet extends HttpServlet {
+public class CategoriasEditarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	String id;
 	String nombre;
 	Blob foto;
-	double precio;
-	int puntos;
+	String tipoCategoriaId;
+	boolean padre;
 	boolean activo;
 	String opcion;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServiciosEditarServlet() {
+    public CategoriasEditarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -64,17 +62,16 @@ public class ServiciosEditarServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
-		ServicioDAO pDAO = new ServicioDAOMySQL();
-		Servicio p = pDAO.getServicio(id);
+		CategoriaDAO pDAO = new CategoriaDAOMySQL();
+		Categoria p = pDAO.getCategoria(id);
 		
 		String activoEstado;
-		
+		String padreEstado;
 		nombre = p.getNombre();
-		foto = p.getFoto();
-		precio = p.getPrecio();
-		puntos = p.getPuntos();
+		foto =p.getFoto();
+		tipoCategoriaId=p.getTipoCategoriaId();
+		padre = p.isPadre();
 		activo = p.isActivo();
-		
 		
 java.sql.Blob rs=null;
 		
@@ -100,9 +97,17 @@ java.sql.Blob rs=null;
 		}else {
 			activoEstado="";
 		}
+		if(padre==true) {
+			padreEstado="checked";
+		}else {
+			padreEstado="";
+		}
 		String estado ="";
 		
-		System.out.println(img);
+		
+		
+		TipoCategoriaIdDAO listaTipoCategoriaIdDAO = new TipoCategoriaIdDAOMySQL();
+		List<TipoCategoriaId> listaTipoCategoriaId = listaTipoCategoriaIdDAO.getListaTipoCategoriaId();
 		
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -110,23 +115,23 @@ java.sql.Blob rs=null;
 				+ "    <meta charset=\"UTF-8\">\r\n"
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-				+ "    <title>CRUD de Servicios - Actualizar</title>\r\n"
 				+ " <link rel='stylesheet' type='text/css' href='estilo.css'>"
+				+ "    <title>CRUD de Persona - Actualizar</title>\r\n"
 				+ "</head>\r\n"
 				+ "<body>");
 		
 		out.println("<div class='titulo'>");
 
-		out.println("<h1>Actualice AServicio</h1>");
+		out.println("<h1>Actualice Persona</h1>");
 		out.println("</div>");
 		out.println("<div class='formu'>");
-		out.println("<form action=\"ServiciosModificarServlet\" method=\"post\">");
+
+		out.println("<form action=\"CategoriasModificarServlet\" method=\"post\">");
 		out.println("<table>");
-		
 		out.println("<tr><td>\n"
-						+ "    <label class=\"text\" for=\"id\">ID:</label></td><td>\n"
-						+ "    <input type=\"text\" name=\"id\" id=\"id\" value='"+id+"' readonly></td>\n"
-						+ "        </tr>");
+				+ "            <label class=\"text\" for=\"id\">ID:</label></td><td>\n"
+				+ "            <input type=\"text\" name=\"id\" id=\"id\" value='"+id+"' readonly></td>\n"
+				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"nombre\">Nombre:</label></td><td>\n"
 				+ "            <input type=\"text\" name=\"nombre\" id=\"nombre\" value='"+nombre+"'></td>\n"
@@ -136,13 +141,24 @@ java.sql.Blob rs=null;
 				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" value='"+img+"'></td>\n"
 				+ "        </tr>");
 		out.println("<tr><td>\n"
-				+ "            <label class=\"text\" for=\"precio\">Precio:</label></td><td>\n"
-				+ "            <input type=\"number\" name=\"precio\" id=\"precio\" value='"+precio+"' step=\"0.1\"></td>\n"
-				+ "        </tr>");
+				+ "            <label class=\"text\" for=\"tipoCategoriaId\">Tipo Categoria ID:</label></td><td>\n"
+				+ "            <select name=tipoCategoriaId id=\"tipoCategoriaId\">\n");
+				for (TipoCategoriaId p1:listaTipoCategoriaId) {
+					if(p1.getId()==tipoCategoriaId) {
+						estado="selected";
+					}else {
+						estado="";
+					}
+					//System.out.println(p1.getId());
+					out.println("<option value='"+p1.getId()+"' "+estado+">"+p1.getNombre()+"</option>");
+				}
+				out.println("</select>\n"
+				+ "    </td>    </tr>");
 		out.println("<tr><td>\n"
-				+ "            <label class=\"text\" for=\"puntos\">Puntos:</label></td><td>\n"
-				+ "            <input type=\"text\" name=\"puntos\" id=\"puntos\" value='"+puntos+"'></td>\n"
+				+ "            <label class=\"text\" for=\"padre\">Padre:</label></td><td>\n"
+				+ "            <input type=\"checkbox\" name=\"padre\" id=\"padre\" "+padreEstado+"></td>\n"
 				+ "        </tr>");
+	
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"activo\">Activo:</label></td><td>\n"
 				+ "            <input type=\"checkbox\" name=\"activo\" id=\"activo\" "+activoEstado+"></td>\n"
@@ -151,19 +167,17 @@ java.sql.Blob rs=null;
 				+ "            <input type=\"submit\" class=\"boton\" value=\"Confirmar\"></td>\n"
 				+ "        </tr>");
 		out.println("</table>");
-
-		out.println("</form>");
 		out.println("</div>");
 
+		out.println("</form>");
 		out.println("<a href='index.jsp'>Volver</a>");
 		
 		out.println("</body>\r\n"
 				+ "</html>");
 		
-
-		
 		
 		
 
 	}
 	}
+

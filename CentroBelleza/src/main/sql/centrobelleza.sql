@@ -150,3 +150,48 @@ INSERT INTO personas (nombre, documento, fechaNacimiento, direccion,
 				IP,activo) VALUES
 	('Belen H D','30998999J','1981-03-03','C/ Molino,12', 'Luecna', '14900',
 		'4','and@g.com', '957000000','Nose','2000-06-01','90','si');	
+		
+/*Tabla Categorias y tipoCategorias*/
+create table tipoCategoria (
+	ID int primary key auto_increment,
+	nombre varchar(30)
+);
+INSERT INTO tipoCategoria (nombre) VALUES
+	('Deluxe');
+INSERT INTO tipoCategoria (nombre) VALUES
+	('Oferta');
+		
+create table categorias (
+	ID int primary key auto_increment,
+    nombre varchar(50),
+    foto mediumblob,
+    tipoCategoriaID int,
+    padre boolean,
+    activo boolean,
+     FOREIGN KEY (tipoCategoriaID) REFERENCES tipoCategoria(ID));
+
+INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
+	('Peluqueria','1','false','true');
+INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
+	('Maquillaje','1','true','true');
+INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
+	('Podologo','2','false','true');
+		
+
+	/*Crear tabla Productos*/
+
+create table productos (
+	id int(5) primary key auto_increment,
+	nombre varchar(50),
+	foto Mediumblob,
+	precio double,
+	fechaAlta date,
+	sku varchar(5),
+	formato varchar(50),
+	stock int(5),
+	activo boolean);
+
+INSERT INTO productos (id, nombre, foto, precio, fechaAlta, sku, formato, stock, activo) VALUES
+	 (1,'Crema', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 1.20, '2022-08-22', 'no', 'maxi', 500, true),
+	 (2,'Shampoo', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 0.50, '2022-08-24', 'no', 'normal', 200, false),
+	 (3,'Mascarilla', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 2.50, '2022-08-18', 'no', 'pequeño', 100, true);

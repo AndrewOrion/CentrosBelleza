@@ -12,22 +12,25 @@
 <html>
 <head>
 
+ <link rel="stylesheet" type="text/css" href="estilo.css">
 
-<link rel="stylesheet" type="text/css" href="estilo.css">
 
 </head>
 <body>
+<div class="titulo">
 <h1>Listado de Personas</h1>
+</div>
 <%
 PersonaDAO pDAO = new PersonaDAOMySQL();
 List<Persona> lista = pDAO.getListaPersonas();
 
    if (lista==null || lista.size()==0) {
-%>
-<h2>No hay datos de personas registrados</h2>
+%><div>
+<h2>No hay datos de personas registrados</h2></div>
 <%
 } else {
 %>
+<div>
 <table class="estilo-tabla">
 	<tr>
 		<th>ID</th>
@@ -66,8 +69,8 @@ List<Persona> lista = pDAO.getListaPersonas();
 				<td><%=a.getFechaAlta() %></td>
 				<td><%=a.getIp() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="PersonasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'>Actualizar</button></form></td>
-				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
+				<td><form action="PersonasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
+				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
 		
@@ -76,9 +79,9 @@ List<Persona> lista = pDAO.getListaPersonas();
 }
 	%>
 	</table>
-	
+</div>
 
 <a href="?opcion=nuevo">Nueva Persona</a><br>
-<a href="index.jsp">Menú Principal</a>
+<a href="index.jsp">Menú principal</a>
 </body>
 </html>
