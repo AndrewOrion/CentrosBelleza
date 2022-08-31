@@ -136,16 +136,16 @@
             <label class="text" for="activo">Activo:</label>
       </td>
       <td>
-            <input type="checkbox" name="activo" id="activo">
+            <input type="checkbox" name="activo" id="activo" value="true">
       </td>
-      <tr><td></td>
+      <tr>
          <td>   <input type="submit" class="boton" value="Confirmar">
-        </td><td><a href="index.jsp">Menú Principal</a></td></tr>
+        </td>
+        <td><a href="index.jsp">Menú Principal</a>
+        </td>
+      </tr>
+    </table>
 </form>  
-</table>
 </div>
-<footer>
-
-</footer>
 </body>
 </html>

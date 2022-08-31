@@ -170,7 +170,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			consultaPreparada.setString(11, a.getComunicaciones());
 			consultaPreparada.setString(12, a.getFechaAlta());
 			consultaPreparada.setString(13, a.getIp());
-			consultaPreparada.setBoolean(14, a.isActivo();
+			consultaPreparada.setBoolean(14, a.isActivo());
 			
 			resultado=consultaPreparada.executeUpdate();
 

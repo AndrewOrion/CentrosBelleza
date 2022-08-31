@@ -31,7 +31,7 @@ public class ServiciosServlet extends HttpServlet {
 	Blob foto;
 	double precio;
 	int puntos;
-	boolean activo;
+	boolean activo=false;
 	String opcion;
     /**
      * @see HttpServlet#HttpServlet()
@@ -91,7 +91,10 @@ public class ServiciosServlet extends HttpServlet {
 		}
 		precio = Double.parseDouble(request.getParameter("precio"));
 		puntos = Integer.parseInt(request.getParameter("puntos"));		
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
+		if (request.getParameter("activo")=="true") {
+			activo=true;
+		}
+		
 		String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
 		
 		Servicio p= new Servicio(nombre, foto, precio, puntos,activo);

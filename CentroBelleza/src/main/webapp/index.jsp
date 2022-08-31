@@ -15,17 +15,17 @@
 	 <div class="middle">
     <div class="text">PERSONAS</div>
   </div></div>
-</td><td><div class="container">
+</td><td></td><td><div class="container">
 	<a href="SalonesServlet"><img src="salones.webp" class="image"  alt="Salones" /></a>
 	 <div class="middle">
     <div class="text">SALONES</div>
   </div></div>
-</td><td><div class="container">
+</td><td></td><td><div class="container">
 	<a href="ServiciosServlet"><img src="servicios.jpg" class="image"  alt="Servicios" /></a>
 	 <div class="middle">
     <div class="text">SERVICIOS</div>
   </div></div>
-</td><td><div class="container">
+</td><td></td><td><div class="container">
 	<a href="CategoriasServlet"><img src="categorias.png" class="image"  alt="Categorias" /></a>
 	 <div class="middle">
     <div class="text">CATEGORIAS</div>

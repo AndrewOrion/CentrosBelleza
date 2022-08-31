@@ -41,10 +41,8 @@ public class PersonasServlet extends HttpServlet {
 	String comunicaciones;
 	String fechaAlta;
 	String ip;
-	String a;
 	String opcion;
-	boolean activo;
-	
+	boolean activo=false;
 	
 	
 	
@@ -97,10 +95,10 @@ public class PersonasServlet extends HttpServlet {
 		comunicaciones = request.getParameter("comunicaciones");
 		fechaAlta = request.getParameter("fechaAlta");
 		ip = request.getParameter("ip");
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
-		
-		System.out.println(activo);
+		if (request.getParameter("activo")=="true") {
+			activo=true;
+		}
 		
 		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
 		Provincia pro= listaProvinciaDAO.getProvincia(provinciaId);

@@ -31,7 +31,7 @@ public class CategoriasServlet extends HttpServlet {
 	Blob foto;
 	String tipoCategoriaId;
 	boolean padre;
-	boolean activo;
+	boolean activo=false;
 	String opcion;
     /**
      * @see HttpServlet#HttpServlet()
@@ -90,7 +90,10 @@ public class CategoriasServlet extends HttpServlet {
 		}
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
 		padre = Boolean.parseBoolean(request.getParameter("padre"));		
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
+		if (request.getParameter("activo")=="true") {
+			activo=true;
+		}
+		
 		String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
 		
 		Categoria p= new Categoria(nombre, foto, tipoCategoriaId, padre ,activo);

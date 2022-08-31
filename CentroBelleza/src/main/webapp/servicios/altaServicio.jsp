@@ -39,7 +39,7 @@
         <tr>
         <td>
             <label  class="text" for="activo">Activo:</label></td>
-        <td><input type="checkbox" name="activo" id="activo"></td></tr>
+        <td><input type="checkbox" name="activo" id="activo" value="true"></td></tr>
         <tr>
         <td>
             <input type="submit"  class="boton"value="Confirmar"></td>

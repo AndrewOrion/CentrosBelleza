@@ -20,6 +20,9 @@ font-size:bolder;
 background-color:black;
 color:white;
 }
+td {
+	width:200px;
+}
 .op{
 width:500px;
 }
@@ -52,7 +55,6 @@ border-radius:10px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
-
 }
 
 .container:hover .image {
