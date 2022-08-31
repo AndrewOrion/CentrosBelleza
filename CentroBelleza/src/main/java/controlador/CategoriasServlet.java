@@ -28,7 +28,7 @@ public class CategoriasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	String tipoCategoriaId;
 	boolean padre;
 	boolean activo=false;
@@ -77,8 +77,9 @@ public class CategoriasServlet extends HttpServlet {
 		
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
-        java.sql.Blob foto=null;
-		
+        
+		/*
+		java.sql.Blob foto=null;
 		FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
 		byte[] imageInBytes = IOUtils.toByteArray(myStream);
 
@@ -87,14 +88,16 @@ public class CategoriasServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
+        foto = request.getParameter("foto");
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
 		padre = Boolean.parseBoolean(request.getParameter("padre"));		
 		if (request.getParameter("activo")=="true") {
 			activo=true;
 		}
 		
-		String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+	//	String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
 		
 		Categoria p= new Categoria(nombre, foto, tipoCategoriaId, padre ,activo);
 		
@@ -141,8 +144,7 @@ public class CategoriasServlet extends HttpServlet {
 		
 		
 		nombre = request.getParameter("nombre");
-		  java.sql.Blob foto=null;
-			
+		 /* java.sql.Blob foto=null;	
 			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
 			byte[] imageInBytes = IOUtils.toByteArray(myStream);
 
@@ -151,8 +153,9 @@ public class CategoriasServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
+		foto = request.getParameter("foto");
 		padre = Boolean.parseBoolean(request.getParameter("padre"));		
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		

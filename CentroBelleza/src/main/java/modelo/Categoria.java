@@ -7,12 +7,12 @@ public class Categoria {
 	
 	private String id;
 	private String nombre;
-	private Blob foto;
+	private String foto;
 	private String tipoCategoriaId;
 	private boolean padre;
 	private boolean activo;
 	
-	public Categoria(String id, String nombre, Blob foto, String tipoCategoriaId, boolean padre, boolean activo) {
+	public Categoria(String id, String nombre, String foto, String tipoCategoriaId, boolean padre, boolean activo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -22,7 +22,7 @@ public class Categoria {
 		this.activo = activo;
 	}
 	
-	public Categoria(String nombre, Blob foto, String tipoCategoriaId, boolean padre, boolean activo) {
+	public Categoria(String nombre, String foto, String tipoCategoriaId, boolean padre, boolean activo) {
 		super();
 		this.nombre = nombre;
 		this.foto = foto;
@@ -47,11 +47,11 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 

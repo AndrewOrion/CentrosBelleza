@@ -30,7 +30,7 @@ public class ServiciosModificarServlet extends HttpServlet {
 
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	double precio;
 	int puntos;
 	boolean activo;
@@ -61,6 +61,8 @@ public class ServiciosModificarServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
+		
+		/*
 		  java.sql.Blob foto=null;
 			
 			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
@@ -71,18 +73,18 @@ public class ServiciosModificarServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		precio = Double.parseDouble(request.getParameter("precio")); 
 		puntos = Integer.parseInt(request.getParameter("puntos")); 
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
-		
+		foto = request.getParameter("foto");
 		boolean activo=false;
 		
 		if(request.getParameter("activo") != null) {
 			activo=true;
 		}
 		
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+		//String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
 		
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -99,7 +101,8 @@ public class ServiciosModificarServlet extends HttpServlet {
 		out.println("<ul>");
 		out.println("<li>Id: "+id+"</li>");
 		out.println("<li>Nombre: "+nombre+"</li>");
-		out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
+	//	out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
+		out.println("<li>Foto: "+foto+"</li>");		
 		out.println("<li>Precio: "+precio+"</li>");
 		out.println("<li>Puntos: "+puntos+"</li>");
 		

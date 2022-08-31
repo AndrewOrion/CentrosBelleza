@@ -30,7 +30,7 @@ INSERT INTO personas (nombre, documento, fechaNacimiento, direccion,
 	('Belen H D','30998999J','1981-03-03','C/ Molino,12', 'Luecna', '14900',
 		'4','and@g.com', '957000000','Nose','2000-06-01','90','si');	
 		
-/*Crear tabla Salones*/
+/*Crear tabla Salones
 
 create table salones (
 	id int(9) primary key auto_increment,
@@ -47,7 +47,7 @@ INSERT INTO salones (id,nombre,direccion,localidad,cp,provinciaID,email,telefono
 	 (100000000,'Ana Gómez','No tiene calle','Granada','14550',6,'ninguno@ninguno.com','95700000',true),
 	 (200000000,'Marta Peña','si tiene calle','Almeria','19550',4,'ninguno13@ninguno.com','95600000',false);
 
-
+*/
 
 /*Crear tabla Provincias*/
 
@@ -110,11 +110,11 @@ INSERT INTO provincias (id,nombre) VALUES
 
 
 /*Crear tabla Productos*/
-
+/*
 create table productos (
 	id int(5) primary key auto_increment,
 	nombre varchar(50),
-	foto Mediumblob,
+	foto varchar(100),
 	precio double,
 	fechaAlta date,
 	sku varchar(5),
@@ -123,33 +123,26 @@ create table productos (
 	activo boolean);
 
 INSERT INTO productos (id, nombre, foto, precio, fechaAlta, sku, formato, stock, activo) VALUES
-	 (1,'Crema', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 1.20, '2022-08-22', 'no', 'maxi', 500, true),
-	 (2,'Shampoo', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 0.50, '2022-08-24', 'no', 'normal', 200, false),
-	 (3,'Mascarilla', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 2.50, '2022-08-18', 'no', 'pequeño', 100, true);
+	 (1,'Crema','Ruta foto 1', 1.20, '2022-08-22', 'no', 'maxi', 500, true),
+	 (2,'Shampoo', 'Ruta foto 2', 0.50, '2022-08-24', 'no', 'normal', 200, false),
+	 (3,'Mascarilla', 'Ruta foto 3', 2.50, '2022-08-18', 'no', 'pequeño', 100, true);
 
-	 
+*/	 
 	 
 /*Crear tabla Servicios*/
 	 
 	 create table servicios (
 	ID int primary key auto_increment,
     nombre varchar(50),
-    foto mediumblob,
+    foto varchar (100),
     precio double,
     puntos int,
     activo boolean);
 
-INSERT INTO personas (nombre, documento, fechaNacimiento, direccion,
-				localidad, cp, provinciaID, email, telefono,comunicaciones,fechaAlta,
-				IP,activo) VALUES
-	('Andres Pino Gallardo','30999999J','1981-03-03','C/ Molino,12', 'Luecna', '14900',
-		'4','and@g.com', '957000000','Nose','2000-06-01','90','si');
-		
-INSERT INTO personas (nombre, documento, fechaNacimiento, direccion,
-				localidad, cp, provinciaID, email, telefono,comunicaciones,fechaAlta,
-				IP,activo) VALUES
-	('Belen H D','30998999J','1981-03-03','C/ Molino,12', 'Luecna', '14900',
-		'4','and@g.com', '957000000','Nose','2000-06-01','90','si');	
+INSERT INTO servicios (nombre, foto, precio, puntos, activo) VALUES
+	('Masajes','Ruta foto 1','30','12',1);
+INSERT INTO servicios (nombre, foto, precio, puntos, activo) VALUES
+	('Domicilio','Ruta foto 2','60','14',1);
 		
 /*Tabla Categorias y tipoCategorias*/
 create table tipoCategoria (
@@ -159,39 +152,26 @@ create table tipoCategoria (
 INSERT INTO tipoCategoria (nombre) VALUES
 	('Deluxe');
 INSERT INTO tipoCategoria (nombre) VALUES
+	('Gama media');
+INSERT INTO tipoCategoria (nombre) VALUES
+	('Gama baja');
+INSERT INTO tipoCategoria (nombre) VALUES
 	('Oferta');
-		
+	
 create table categorias (
 	ID int primary key auto_increment,
     nombre varchar(50),
-    foto mediumblob,
+    foto varchar(100),
     tipoCategoriaID int,
     padre boolean,
     activo boolean,
      FOREIGN KEY (tipoCategoriaID) REFERENCES tipoCategoria(ID));
 
 INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
-	('Peluqueria','1','false','true');
+	('Peluqueria','1',0,1);
 INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
-	('Maquillaje','1','true','true');
+	('Maquillaje','3',1,0);
 INSERT INTO categorias (nombre, tipoCategoriaID, padre, activo) VALUES
-	('Podologo','2','false','true');
+	('Podologo','4',1,1);
 		
 
-	/*Crear tabla Productos*/
-
-create table productos (
-	id int(5) primary key auto_increment,
-	nombre varchar(50),
-	foto Mediumblob,
-	precio double,
-	fechaAlta date,
-	sku varchar(5),
-	formato varchar(50),
-	stock int(5),
-	activo boolean);
-
-INSERT INTO productos (id, nombre, foto, precio, fechaAlta, sku, formato, stock, activo) VALUES
-	 (1,'Crema', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 1.20, '2022-08-22', 'no', 'maxi', 500, true),
-	 (2,'Shampoo', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 0.50, '2022-08-24', 'no', 'normal', 200, false),
-	 (3,'Mascarilla', x'89504E470D0A1A0A0000000D494844520000001000000010080200000090916836000000017352474200AECE1CE90000000467414D410000B18F0BFC6105000000097048597300000EC300000EC301C76FA8640000001E49444154384F6350DAE843126220493550F1A80662426C349406472801006AC91F1040F796BD0000000049454E44AE426082', 2.50, '2022-08-18', 'no', 'pequeño', 100, true);

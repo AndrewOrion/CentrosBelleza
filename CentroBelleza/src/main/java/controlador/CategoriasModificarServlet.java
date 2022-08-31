@@ -1,12 +1,8 @@
 package controlador;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Blob;
-import java.sql.SQLException;
 
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
 import dao.CategoriaDAO;
 import dao.CategoriaDAOMySQL;
@@ -29,7 +25,7 @@ public class CategoriasModificarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	String tipoCategoriaId;
 	boolean padre;
 	boolean activo;
@@ -60,7 +56,7 @@ public class CategoriasModificarServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
-		  java.sql.Blob foto=null;
+	/*	  java.sql.Blob foto=null;
 			
 				FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
 				byte[] imageInBytes = IOUtils.toByteArray(myStream);
@@ -70,7 +66,8 @@ public class CategoriasModificarServlet extends HttpServlet {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
+		foto = request.getParameter("foto");
 		padre = Boolean.parseBoolean(request.getParameter("activo"));
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
@@ -84,7 +81,7 @@ public class CategoriasModificarServlet extends HttpServlet {
 			padre=true;
 		}
 		
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+
 
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -101,7 +98,8 @@ public class CategoriasModificarServlet extends HttpServlet {
 		out.println("<ul>");
 		out.println("<li>Id: "+id+"</li>");
 		out.println("<li>Nombre: "+nombre+"</li>");
-		out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
+	//	out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
+		out.println("<li>Foto: "+foto+"</li>");
 		out.println("<li>activo: "+padre+"</li>");	
 		out.println("<li>activo: "+activo+"</li>");
 		out.println("</ul>");

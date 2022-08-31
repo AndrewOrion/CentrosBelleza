@@ -47,19 +47,20 @@ List<Categoria> lista = pDAO.getListaCategorias();
 		java.sql.Blob rs=null;
 		System.out.println(a);
 		
-		
+		/*
 		if(a.getFoto()!=null){
 			rs=a.getFoto();
 			
 		} 
 		byte[] imageInBytes = IOUtils.toByteArray(a.getFoto().getBinaryStream());
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);*/
 		%>
 	
 			<tr>
 				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
-				<td><img width="100px" src="data:image/jpg;base64,<%=img %>" /></td>
+			<!--<td><img width="100px" src="data:image/jpg;base64,<%//=img %>" /></td>-->
+				<td><%=a.getFoto() %></td>
 				<td><%=a.getTipoCategoriaId() %></td>
 				<td><%=a.isPadre() %></td>
 				<td><%=a.isActivo() %></td>

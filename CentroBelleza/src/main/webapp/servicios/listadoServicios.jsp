@@ -4,9 +4,7 @@
 <%@page import="dao.ServicioDAO"%>
 <%@page import="modelo.Servicio"%>
 <%@page import="java.util.List"%>
-<%@page import="java.io.FileInputStream"%>
-<%@page import="org.apache.tomcat.jakartaee.commons.io.IOUtils"%>
-<%@page import="java.sql.Blob"%>
+
 
 
 <!DOCTYPE html>
@@ -44,19 +42,20 @@ List<Servicio> lista = pDAO.getListaServicios();
 	</tr>
 	<%
 	for (Servicio a:lista) {
-		java.sql.Blob rs=null;
+	/*	java.sql.Blob rs=null;
 		System.out.println(a);
 		if(a.getFoto()!=null){
 			rs=a.getFoto();
 		} 
 		byte[] imageInBytes = IOUtils.toByteArray(a.getFoto().getBinaryStream());
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);*/
 		%>
 	
 			<tr>
 				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
-				<td><img width="100px" src="data:image/jpg;base64,<%=img %>" /></td>
+			<!-- 	<td><img width="100px" src="data:image/jpg;base64,<%//=img %>" /></td>-->
+				<td><%=a.getFoto() %></td>
 				<td><%=a.getPrecio() %></td>
 				<td><%=a.getPuntos() %></td>
 				<td><%=a.isActivo() %></td>

@@ -34,7 +34,7 @@
         <tr>
         <td>
             <label  class="text" for="foto">Foto:</label></td>
-        <td><input type="file" name="foto" id="foto"></td></tr>
+        <td><input type="text" name="foto" id="foto"></td></tr>
         <tr>
           <td>
             <label class="text" for="tipoCategoriaId">Tipo de Categoría:</label>

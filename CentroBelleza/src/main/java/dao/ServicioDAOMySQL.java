@@ -37,7 +37,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			
 				String id = resultado.getString("id");
 				String nombre = resultado.getString("nombre");
-				Blob foto = resultado.getBlob("foto");
+				String foto = resultado.getString("foto");
 				double precio = resultado.getDouble("precio");
 				int puntos = resultado.getInt("puntos");
 				boolean activo = resultado.getBoolean("activo");
@@ -77,7 +77,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			if (resultado.next()) {
 				
 				String nombre = resultado.getString("nombre");
-				Blob foto = resultado.getBlob("foto");
+				String foto = resultado.getString("foto");
 				double precio = resultado.getDouble("precio");
 				int puntos = resultado.getInt("puntos");				
 				boolean activo = resultado.getBoolean("activo");
@@ -141,7 +141,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			
 			consultaPreparada.setString(1, a.getId());
 			consultaPreparada.setString(2, a.getNombre());
-			consultaPreparada.setBlob(3, a.getFoto());
+			consultaPreparada.setString(3, a.getFoto());
 			consultaPreparada.setDouble(4, a.getPrecio());
 			consultaPreparada.setInt(5, a.getPuntos());
 			consultaPreparada.setBoolean(6, a.isActivo());
@@ -180,7 +180,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 					+ "WHERE ID=?");
 			
 			consultaPreparada.setString(1, servicio.getNombre());
-			consultaPreparada.setBlob(2, servicio.getFoto());
+			consultaPreparada.setString(2, servicio.getFoto());
 			consultaPreparada.setDouble(3, servicio.getPrecio());
 			consultaPreparada.setInt(4, servicio.getPuntos());
 			consultaPreparada.setBoolean(5, servicio.isActivo());

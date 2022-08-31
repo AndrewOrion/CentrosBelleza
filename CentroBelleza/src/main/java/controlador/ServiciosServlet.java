@@ -1,13 +1,13 @@
 package controlador;
 
-import java.io.FileInputStream;
+//import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Blob;
+//import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
+//import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
 import dao.ServicioDAO;
 import dao.ServicioDAOMySQL;
@@ -28,7 +28,7 @@ public class ServiciosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	double precio;
 	int puntos;
 	boolean activo=false;
@@ -77,7 +77,9 @@ public class ServiciosServlet extends HttpServlet {
 		
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
-        java.sql.Blob foto=null;
+       
+	/*	
+		java.sql.Blob foto=null;
 		
         
 		FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
@@ -88,14 +90,16 @@ public class ServiciosServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
 		precio = Double.parseDouble(request.getParameter("precio"));
-		puntos = Integer.parseInt(request.getParameter("puntos"));		
+		puntos = Integer.parseInt(request.getParameter("puntos"));	
+		foto = request.getParameter("foto");
 		if (request.getParameter("activo")=="true") {
 			activo=true;
 		}
 		
-		String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
+		//String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
 		
 		Servicio p= new Servicio(nombre, foto, precio, puntos,activo);
 		
@@ -116,19 +120,6 @@ public class ServiciosServlet extends HttpServlet {
 		mostrarListado(request,response); //muestro la lista de nuevo
 			
 		}
-/*	private void mostrarFormularioEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String id = request.getParameter("ID"); 
-		
-		PersonaDAO dao = new PersonaDAOMySQL();
-		
-		
-		Persona persona = dao.getPersona(id);
-		request.setAttribute("persona",persona);	
-		request.getRequestDispatcher("/personas/editarPersona.jsp").forward(request, response);
-	}*/
-	
-	
 	
 	
 	private void mostrarListado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -154,7 +145,8 @@ public class ServiciosServlet extends HttpServlet {
 		
 		
 		nombre = request.getParameter("nombre");
-		  java.sql.Blob foto=null;
+	/*	 
+		java.sql.Blob foto=null;
 			
 			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
 			byte[] imageInBytes = IOUtils.toByteArray(myStream);
@@ -164,11 +156,11 @@ public class ServiciosServlet extends HttpServlet {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		precio = Double.parseDouble(request.getParameter("precio"));
 		puntos = Integer.parseInt(request.getParameter("puntos"));		
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
-		
+		foto = request.getParameter("foto");
 		Servicio servicio = new Servicio(nombre, foto, precio,puntos,activo);
 		
 		ServicioDAO dao = new ServicioDAOMySQL();

@@ -37,7 +37,8 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 			
 				String id = resultado.getString("id");
 				String nombre = resultado.getString("nombre");
-				Blob foto = resultado.getBlob("foto");
+		//		Blob foto = resultado.getBlob("foto");
+				String foto =resultado.getString("foto");
 				String tipoCategoriaId = resultado.getString("tipoCategoriaId");
 				boolean padre = resultado.getBoolean("padre");
 				boolean activo = resultado.getBoolean("activo");
@@ -78,7 +79,7 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 				
 				
 				String nombre = resultado.getString("nombre");
-				Blob foto = resultado.getBlob("foto");
+				String foto = resultado.getString("foto");
 				String tipoCategoriaId = resultado.getString("tipoCategoriaId");
 				boolean padre = resultado.getBoolean("padre");
 				boolean activo = resultado.getBoolean("activo");
@@ -153,7 +154,7 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 			
 			consultaPreparada.setString(1, a.getId());
 			consultaPreparada.setString(2, a.getNombre());
-			consultaPreparada.setBlob(3, a.getFoto());
+			consultaPreparada.setString(3, a.getFoto());
 			consultaPreparada.setString(4, a.getTipoCategoriaId());
 			consultaPreparada.setString(5, padreEstado);
 			consultaPreparada.setString(6, activoEstado);
@@ -192,7 +193,7 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 					+ "WHERE ID=?");
 			
 			consultaPreparada.setString(1, Categoria.getNombre());
-			consultaPreparada.setBlob(2, Categoria.getFoto());
+			consultaPreparada.setString(2, Categoria.getFoto());
 			consultaPreparada.setString(3, Categoria.getTipoCategoriaId());
 			consultaPreparada.setBoolean(4, Categoria.isPadre());
 			consultaPreparada.setBoolean(5, Categoria.isActivo());

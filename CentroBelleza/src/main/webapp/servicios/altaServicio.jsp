@@ -17,7 +17,7 @@
     <h1>Alta de Servicio</h1>
 </div>
  <div class="formu">
-        <form action="ServiciosServlet" method="post">
+        <form action="ServiciosServlet" method="post" enctype="multipart/form-data">
         <input type="hidden" name="opcion" value="insertar"/>
         <table>
         <tr>

@@ -7,7 +7,7 @@ public class Servicio {
 	
 	private String id;
 	private String nombre;
-	private Blob foto;
+	private String foto;
 	private double precio;
 	private int puntos;
 	private boolean activo;
@@ -15,7 +15,7 @@ public class Servicio {
 	public Servicio () {
 		
 	}
-	public Servicio(String id, String nombre, Blob foto, double precio, int puntos, boolean activo) {
+	public Servicio(String id, String nombre, String foto, double precio, int puntos, boolean activo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -25,7 +25,7 @@ public class Servicio {
 		this.activo = activo;
 	}
 	
-	public Servicio( String nombre, Blob foto, double precio, int puntos, boolean activo) {
+	public Servicio( String nombre, String foto, double precio, int puntos, boolean activo) {
 		super();
 		this.nombre = nombre;
 		this.foto = foto;
@@ -45,10 +45,10 @@ public class Servicio {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Blob getFoto() {
+	public String getFoto() {
 		return foto;
 	}
-	public void setFoto(Blob foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 	public double getPrecio() {

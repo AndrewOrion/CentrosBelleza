@@ -33,7 +33,7 @@ public class CategoriasEditarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	String tipoCategoriaId;
 	boolean padre;
 	boolean activo;
@@ -73,8 +73,7 @@ public class CategoriasEditarServlet extends HttpServlet {
 		padre = p.isPadre();
 		activo = p.isActivo();
 		
-java.sql.Blob rs=null;
-		
+	/*	java.sql.Blob rs=null;
 		if(p.getFoto()!=null){
 			rs=p.getFoto();
 		}
@@ -90,7 +89,7 @@ java.sql.Blob rs=null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		if(activo==true) {
 			activoEstado="checked";
@@ -138,7 +137,7 @@ java.sql.Blob rs=null;
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"foto\">Foto:</label></td><td>\n"
-				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" value='"+img+"'></td>\n"
+				+ "            <input type=\"text\" name=\"foto\" id=\"foto\" value=''></td>\n"
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"tipoCategoriaId\">Tipo Categoria ID:</label></td><td>\n"

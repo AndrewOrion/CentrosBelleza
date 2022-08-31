@@ -2,8 +2,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Blob;
-import java.sql.SQLException;
+
 import java.util.List;
 
 
@@ -14,11 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.MultipartConfig;
 
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
 import dao.ServicioDAO;
 import dao.ServicioDAOMySQL;
-import modelo.Provincia;
+
 import modelo.Servicio;
 
 /**
@@ -35,7 +33,7 @@ public class ServiciosEditarServlet extends HttpServlet {
 
 	String id;
 	String nombre;
-	Blob foto;
+	String foto;
 	double precio;
 	int puntos;
 	boolean activo;
@@ -75,13 +73,11 @@ public class ServiciosEditarServlet extends HttpServlet {
 		puntos = p.getPuntos();
 		activo = p.isActivo();
 		
-		
-java.sql.Blob rs=null;
-		
+		/*
+		java.sql.Blob rs=null;
 		if(p.getFoto()!=null){
 			rs=p.getFoto();
-		}
-		
+		}		
 		String img ="";
 		try {
 			byte[] imageInBytes;
@@ -93,7 +89,7 @@ java.sql.Blob rs=null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		if(activo==true) {
 			activoEstado="checked";
@@ -102,7 +98,7 @@ java.sql.Blob rs=null;
 		}
 		String estado ="";
 		
-		System.out.println(img);
+	//	System.out.println(img);
 		
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -133,7 +129,7 @@ java.sql.Blob rs=null;
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"foto\">Foto:</label></td><td>\n"
-				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" value='"+img+"'></td>\n"
+				+ "            <input type=\"text\" name=\"foto\" id=\"foto\" value=''></td>\n"
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"precio\">Precio:</label></td><td>\n"
