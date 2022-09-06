@@ -17,8 +17,8 @@
     <h1>Alta de Servicio</h1>
 </div>
  <div class="formu">
-        <form action="ServiciosServlet" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="opcion" value="insertar"/>
+        <form action="ServiciosServlet" method="post" enctype='multipart/form-data'>
+        
         <table>
         <tr>
         <td>
@@ -41,7 +41,7 @@
             <label  class="text" for="activo">Activo:</label></td>
         <td><input type="checkbox" name="activo" id="activo" value="true"></td></tr>
         <tr>
-        <td>
+        <td><input type="hidden" name="opcion" value="insertar"/>
             <input type="submit"  class="boton"value="Confirmar"></td>
             <td><a href="index.jsp">Menú Principal</a></td></tr>     
     </table>

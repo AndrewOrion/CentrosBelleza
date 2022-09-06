@@ -1,24 +1,26 @@
 package controlador;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Blob;
-import java.sql.SQLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
 
 import dao.CategoriaDAO;
 import dao.CategoriaDAOMySQL;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import modelo.Categoria;
 
-
+@MultipartConfig
 @WebServlet(
 	    name = "CategoriasServlet", 
 	    urlPatterns = {"/CategoriasServlet"}
@@ -30,9 +32,13 @@ public class CategoriasServlet extends HttpServlet {
 	String nombre;
 	String foto;
 	String tipoCategoriaId;
-	boolean padre;
+	boolean padre=false;
 	boolean activo=false;
 	String opcion;
+	/*FOTO*/
+	private String pathFiles = "\\imagenes";
+	private File uploads = new File(pathFiles);
+	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,19 +62,15 @@ public class CategoriasServlet extends HttpServlet {
 			eliminarCategoria(request,response);
 		}else if (opcion.equals("editar")) {
 			System.out.println(opcion);;
-		}else if (opcion.equals("modificar")) {
-			modificarCategoria(request,response);
 		}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		opcion = request.getParameter("opcion");
+		String opcion = request.getParameter("opcion");
 		if (opcion.equals("insertar")) {
 			insertarCategoria(request,response);
-		}else if (opcion.equals("modificar")) {
-			modificarCategoria(request,response);
 		}
 	}
 		
@@ -77,35 +79,35 @@ public class CategoriasServlet extends HttpServlet {
 		
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
-        
-		/*
-		java.sql.Blob foto=null;
-		FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
-		byte[] imageInBytes = IOUtils.toByteArray(myStream);
-
-		try {
-			foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
         foto = request.getParameter("foto");
+		
+	try {
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
-		padre = Boolean.parseBoolean(request.getParameter("padre"));		
-		if (request.getParameter("activo")=="true") {
-			activo=true;
+		padre = Boolean.parseBoolean(request.getParameter("padre"));
+		activo = Boolean.parseBoolean(request.getParameter("activo"));		
+		
+			Part part = request.getPart("foto");
+			System.out.println(part);
+			if(part == null) {
+				System.out.println("No ha seleccionado un archivo");
+				return;
+			}
+			
+			if(isExtension(part.getSubmittedFileName(), extens)) {
+				String photo = saveFile(part, uploads);
+				Categoria p= new Categoria(nombre, photo, tipoCategoriaId, padre ,activo);
+				
+				CategoriaDAO dao = new CategoriaDAOMySQL();
+				dao.insertarCategoria(p); 
+				
+				mostrarListado(request,response);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-	//	String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
-		
-		Categoria p= new Categoria(nombre, foto, tipoCategoriaId, padre ,activo);
-		
-		CategoriaDAO dao = new CategoriaDAOMySQL();
-		dao.insertarCategoria(p); 
-		
-		mostrarListado(request,response);
-		
+		response.sendRedirect("index.jsp");
 	}
 		
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -140,20 +142,8 @@ public class CategoriasServlet extends HttpServlet {
 	}
 	
     private void modificarCategoria(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
+			
 		nombre = request.getParameter("nombre");
-		 /* java.sql.Blob foto=null;	
-			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
-			byte[] imageInBytes = IOUtils.toByteArray(myStream);
-
-			try {
-				foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
 		foto = request.getParameter("foto");
 		padre = Boolean.parseBoolean(request.getParameter("padre"));		
@@ -166,7 +156,37 @@ public class CategoriasServlet extends HttpServlet {
 		mostrarListado(request, response);
 		
 	}
-    
+	private String saveFile(Part part, File pathUploads) {
+		String pathAbsolute = "";
+		
+		try {
+			
+			Path path = Paths.get(part.getSubmittedFileName());
+			String fileName = path.getFileName().toString();
+			InputStream input = part.getInputStream();
+			
+			if(input != null) {
+				File file = new File(pathUploads, fileName);
+				pathAbsolute = file.getAbsolutePath();
+				Files.copy(input, file.toPath());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return pathAbsolute;
+	}
+	
+	private boolean isExtension(String fileName, String[] extensions) {
+		for(String et : extensions) {
+			if(fileName.toLowerCase().endsWith(et)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
    
 	
 }

@@ -152,7 +152,10 @@ public class PersonaDAOMySQL implements PersonaDAO {
 	public int insertarPersona(Persona a) {
 		Connection con = conexion.getConexion();
 		int resultado=0;
-		
+		boolean activoEstado=false;
+		if(a.isActivo()==true) {
+			activoEstado=true;
+		}
 		try {
 			consultaPreparada = con.prepareStatement(
 					"insert into personas values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -170,7 +173,7 @@ public class PersonaDAOMySQL implements PersonaDAO {
 			consultaPreparada.setString(11, a.getComunicaciones());
 			consultaPreparada.setString(12, a.getFechaAlta());
 			consultaPreparada.setString(13, a.getIp());
-			consultaPreparada.setBoolean(14, a.isActivo());
+			consultaPreparada.setBoolean(14, activoEstado);
 			
 			resultado=consultaPreparada.executeUpdate();
 

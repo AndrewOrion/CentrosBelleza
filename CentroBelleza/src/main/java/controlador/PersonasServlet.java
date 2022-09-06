@@ -1,7 +1,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import dao.PersonaDAO;
@@ -15,12 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.Persona;
 import modelo.Provincia;
-
-
-/**
- * Servlet implementation class BellezaServlet
- 
-@WebServlet("/PersonasServlet")*/
 @WebServlet(
 	    name = "PersonasServlet", 
 	    urlPatterns = {"/PersonasServlet"}
@@ -51,16 +44,14 @@ public class PersonasServlet extends HttpServlet {
      */
     public PersonasServlet() {
         super();
-        // TODO Auto-generated constructor stub
+      
     }
-
-
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//envío parametro para listado o nuevo o eliminar...
-		String opcion = request.getParameter("opcion");
+		opcion = request.getParameter("opcion");
 		if (opcion==null || opcion.equals("listado")) {
 			mostrarListado(request,response);
 		} else if (opcion.equals("nuevo")) {
@@ -73,14 +64,6 @@ public class PersonasServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		opcion = request.getParameter("opcion");
-		if (opcion.equals("insertar")) {
-			insertarPersona(request,response);
-		}
-	}
-		
-	private void insertarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		PrintWriter out = response.getWriter();
 		
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
@@ -96,9 +79,7 @@ public class PersonasServlet extends HttpServlet {
 		fechaAlta = request.getParameter("fechaAlta");
 		ip = request.getParameter("ip");
 		
-		if (request.getParameter("activo")=="true") {
-			activo=true;
-		}
+		activo = Boolean.parseBoolean(request.getParameter("activo"));		
 		
 		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
 		Provincia pro= listaProvinciaDAO.getProvincia(provinciaId);
@@ -114,6 +95,7 @@ public class PersonasServlet extends HttpServlet {
 		
 	}
 		
+	
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PersonaDAO dao = new PersonaDAOMySQL();

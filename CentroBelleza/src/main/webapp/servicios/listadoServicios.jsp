@@ -33,6 +33,7 @@ List<Servicio> lista = pDAO.getListaServicios();
 	<tr>
 		<th>ID</th>
 		<th>Nombre</th>
+		<th>Ruta Foto</th>
 		<th>Foto</th>
 		<th>Precio</th>
 		<th>Puntos</th>		
@@ -42,13 +43,6 @@ List<Servicio> lista = pDAO.getListaServicios();
 	</tr>
 	<%
 	for (Servicio a:lista) {
-	/*	java.sql.Blob rs=null;
-		System.out.println(a);
-		if(a.getFoto()!=null){
-			rs=a.getFoto();
-		} 
-		byte[] imageInBytes = IOUtils.toByteArray(a.getFoto().getBinaryStream());
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);*/
 		%>
 	
 			<tr>
@@ -56,6 +50,7 @@ List<Servicio> lista = pDAO.getListaServicios();
 				<td><%=a.getNombre() %></td>
 			<!-- 	<td><img width="100px" src="data:image/jpg;base64,<%//=img %>" /></td>-->
 				<td><%=a.getFoto() %></td>
+				<td><img width="100px" src="<%=a.getFoto() %>"/></td>				
 				<td><%=a.getPrecio() %></td>
 				<td><%=a.getPuntos() %></td>
 				<td><%=a.isActivo() %></td>

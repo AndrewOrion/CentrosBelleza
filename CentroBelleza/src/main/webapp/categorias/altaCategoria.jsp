@@ -24,8 +24,8 @@
 		List<TipoCategoriaId> listaTipoCategoriaId = listaTipoCategoriaIdDAO.getListaTipoCategoriaId();
 	%>
  <div class="formu">
-        <form action="CategoriasServlet" method="post">
-        <input type="hidden" name="opcion" value="insertar"/>
+        <form action="CategoriasServlet" method="post" enctype='multipart/form-data'>
+        <input type="hidden" name="opcion" value="insertar">
         <table>
         <tr>
         <td>
@@ -34,7 +34,7 @@
         <tr>
         <td>
             <label  class="text" for="foto">Foto:</label></td>
-        <td><input type="text" name="foto" id="foto"></td></tr>
+        <td><input type="file" name="foto" id="foto"></td></tr>
         <tr>
           <td>
             <label class="text" for="tipoCategoriaId">Tipo de Categoría:</label>
@@ -54,7 +54,7 @@
         <tr>
         <td>  
             <label  class="text" for="padre">Padre:</label></td>
-        <td><input type="checkbox" name="padre" id="padre"></td></tr>
+        <td><input type="checkbox" name="padre" id="padre" value="true"></td></tr>
         <tr>
         <td>
             <label  class="text" for="activo">Activo:</label></td>

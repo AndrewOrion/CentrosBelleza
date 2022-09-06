@@ -5,7 +5,6 @@
 <%@page import="modelo.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.FileInputStream"%>
-<%@page import="org.apache.tomcat.jakartaee.commons.io.IOUtils"%>
 <%@page import="java.sql.Blob"%>
 
 
@@ -35,6 +34,7 @@ List<Categoria> lista = pDAO.getListaCategorias();
 	<tr>
 		<th>ID</th>
 		<th>Nombre</th>
+		<th>Ruta Foto</th>
 		<th>Foto</th>
 		<th>Tipo Categoría ID</th>
 		<th>Padre</th>		
@@ -47,20 +47,13 @@ List<Categoria> lista = pDAO.getListaCategorias();
 		java.sql.Blob rs=null;
 		System.out.println(a);
 		
-		/*
-		if(a.getFoto()!=null){
-			rs=a.getFoto();
-			
-		} 
-		byte[] imageInBytes = IOUtils.toByteArray(a.getFoto().getBinaryStream());
-		String img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);*/
 		%>
 	
 			<tr>
 				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
-			<!--<td><img width="100px" src="data:image/jpg;base64,<%//=img %>" /></td>-->
 				<td><%=a.getFoto() %></td>
+				<td><img width="100px" src="<%=a.getFoto() %>"/></td>				
 				<td><%=a.getTipoCategoriaId() %></td>
 				<td><%=a.isPadre() %></td>
 				<td><%=a.isActivo() %></td>
@@ -75,8 +68,6 @@ List<Categoria> lista = pDAO.getListaCategorias();
 }
 	%>
 	</table>
-	
-
 <a href="?opcion=nuevo">Nueva Categoría</a><br>
 <a href="index.jsp">Menú Principal</a>
 </body>

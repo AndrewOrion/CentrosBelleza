@@ -6,7 +6,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.tomcat.jakartaee.commons.io.IOUtils;
+import javax.servlet.annotation.MultipartConfig;
 
 import dao.CategoriaDAO;
 import dao.CategoriaDAOMySQL;
@@ -24,7 +24,7 @@ import modelo.TipoCategoriaId;
 /**
  * Servlet implementation class PersonasEditServlet
  */
-
+@MultipartConfig
 @WebServlet(
 	    name = "CategoriasEditarServlet", 
 	    urlPatterns = {"/CategoriasEditarServlet"}
@@ -43,7 +43,7 @@ public class CategoriasEditarServlet extends HttpServlet {
      */
     public CategoriasEditarServlet() {
         super();
-        // TODO Auto-generated constructor stub
+     
     }
 
 	/**
@@ -59,37 +59,19 @@ public class CategoriasEditarServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
+		String activoEstado;
+		String padreEstado;
 		
 		PrintWriter out = response.getWriter();
 		
 		CategoriaDAO pDAO = new CategoriaDAOMySQL();
 		Categoria p = pDAO.getCategoria(id);
-		
-		String activoEstado;
-		String padreEstado;
+				
 		nombre = p.getNombre();
 		foto =p.getFoto();
 		tipoCategoriaId=p.getTipoCategoriaId();
 		padre = p.isPadre();
 		activo = p.isActivo();
-		
-	/*	java.sql.Blob rs=null;
-		if(p.getFoto()!=null){
-			rs=p.getFoto();
-		}
-		
-		String img ="";
-		try {
-			byte[] imageInBytes;
-			imageInBytes = IOUtils.toByteArray(p.getFoto().getBinaryStream());
-			img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		
 		if(activo==true) {
 			activoEstado="checked";
@@ -125,7 +107,7 @@ public class CategoriasEditarServlet extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class='formu'>");
 
-		out.println("<form action=\"CategoriasModificarServlet\" method=\"post\">");
+		out.println("<form action=\"CategoriasModificarServlet\" method=\"post\" >");
 		out.println("<table>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"id\">ID:</label></td><td>\n"
@@ -137,7 +119,7 @@ public class CategoriasEditarServlet extends HttpServlet {
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"foto\">Foto:</label></td><td>\n"
-				+ "            <input type=\"text\" name=\"foto\" id=\"foto\" value=''></td>\n"
+				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" value='"+foto+"'></td>\n"
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"tipoCategoriaId\">Tipo Categoria ID:</label></td><td>\n"
@@ -148,7 +130,6 @@ public class CategoriasEditarServlet extends HttpServlet {
 					}else {
 						estado="";
 					}
-					//System.out.println(p1.getId());
 					out.println("<option value='"+p1.getId()+"' "+estado+">"+p1.getNombre()+"</option>");
 				}
 				out.println("</select>\n"
@@ -173,9 +154,7 @@ public class CategoriasEditarServlet extends HttpServlet {
 		
 		out.println("</body>\r\n"
 				+ "</html>");
-		
-		
-		
+				
 
 	}
 	}

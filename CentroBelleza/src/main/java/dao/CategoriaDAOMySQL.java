@@ -135,17 +135,17 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 	public int insertarCategoria(Categoria a) {
 		Connection con = conexion.getConexion();
 		int resultado=0;
-		String activoEstado;
-		String padreEstado;
+		boolean activoEstado;
+		boolean padreEstado;
 		if(a.isActivo()==true) {
-			activoEstado="checked";
+			activoEstado=true;
 		}else {
-			activoEstado="";
+			activoEstado=false;
 		}
 		if(a.isPadre()==true) {
-			padreEstado="checked";
+			padreEstado=true;
 		}else {
-			padreEstado="";
+			padreEstado=false;
 		}
 		try {
 			
@@ -156,8 +156,8 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 			consultaPreparada.setString(2, a.getNombre());
 			consultaPreparada.setString(3, a.getFoto());
 			consultaPreparada.setString(4, a.getTipoCategoriaId());
-			consultaPreparada.setString(5, padreEstado);
-			consultaPreparada.setString(6, activoEstado);
+			consultaPreparada.setBoolean(5, padreEstado);
+			consultaPreparada.setBoolean(6, activoEstado);
 			
 			resultado=consultaPreparada.executeUpdate();
 

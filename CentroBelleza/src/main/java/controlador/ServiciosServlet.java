@@ -1,10 +1,13 @@
 package controlador;
 
+import java.io.File;
 //import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-//import java.sql.Blob;
-import java.sql.SQLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 //import org.apache.tomcat.jakartaee.commons.io.IOUtils;
@@ -12,13 +15,15 @@ import java.util.List;
 import dao.ServicioDAO;
 import dao.ServicioDAOMySQL;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import modelo.Servicio;
 
-
+@MultipartConfig
 @WebServlet(
 	    name = "ServiciosServlet", 
 	    urlPatterns = {"/ServiciosServlet"}
@@ -33,6 +38,10 @@ public class ServiciosServlet extends HttpServlet {
 	int puntos;
 	boolean activo=false;
 	String opcion;
+	/*FOTO*/
+	private String pathFiles = "\\imagenes";
+	private File uploads = new File(pathFiles);
+	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -56,19 +65,15 @@ public class ServiciosServlet extends HttpServlet {
 			eliminarServicio(request,response);
 		}else if (opcion.equals("editar")) {
 			System.out.println(opcion);;
-		}else if (opcion.equals("modificar")) {
-			modificarServicio(request,response);
 		}
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		opcion = request.getParameter("opcion");
+		String opcion = request.getParameter("opcion");
 		if (opcion.equals("insertar")) {
 			insertarServicio(request,response);
-		}else if (opcion.equals("modificar")) {
-			modificarServicio(request,response);
 		}
 	}
 		
@@ -76,38 +81,42 @@ public class ServiciosServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		id = request.getParameter("id");
-		nombre = request.getParameter("nombre");
-       
-	/*	
-		java.sql.Blob foto=null;
-		
-        
-		FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
-		byte[] imageInBytes = IOUtils.toByteArray(myStream);
-
-		try {
-			foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
+		nombre = request.getParameter("nombre");		
 		precio = Double.parseDouble(request.getParameter("precio"));
 		puntos = Integer.parseInt(request.getParameter("puntos"));	
 		foto = request.getParameter("foto");
-		if (request.getParameter("activo")=="true") {
-			activo=true;
-		}
-		
-		//String f = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
-		
-		Servicio p= new Servicio(nombre, foto, precio, puntos,activo);
-		
-		ServicioDAO dao = new ServicioDAOMySQL();
-		dao.insertarServicio(p); 
-		
-		mostrarListado(request,response);
-		
+		activo = Boolean.parseBoolean(request.getParameter("activo"));
+				
+		try {
+			id = request.getParameter("id");
+			nombre = request.getParameter("nombre");
+			puntos = Integer.parseInt(request.getParameter("puntos"));
+			precio = Double.parseDouble(request.getParameter("precio"));
+
+			activo = Boolean.parseBoolean(request.getParameter("activo"));		
+			
+				Part part = request.getPart("foto");
+				
+				if(part == null) {
+					System.out.println("No ha seleccionado un archivo");
+					return;
+				}
+				
+				if(isExtension(part.getSubmittedFileName(), extens)) {
+					String photo = saveFile(part, uploads);
+					Servicio p= new Servicio(nombre, photo, precio, puntos ,activo);
+					
+					ServicioDAO dao = new ServicioDAOMySQL();
+					dao.insertarServicio(p); 
+					
+					mostrarListado(request,response);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			response.sendRedirect("index.jsp");
 	}
 		
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -139,36 +148,38 @@ public class ServiciosServlet extends HttpServlet {
 		mostrarListado(request,response); //muestro la lista de nuevo
 		
 	}
-	
-    private void modificarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		nombre = request.getParameter("nombre");
-	/*	 
-		java.sql.Blob foto=null;
-			
-			FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("cambiar"));
-			byte[] imageInBytes = IOUtils.toByteArray(myStream);
 
-			try {
-				foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-		precio = Double.parseDouble(request.getParameter("precio"));
-		puntos = Integer.parseInt(request.getParameter("puntos"));		
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
-		foto = request.getParameter("foto");
-		Servicio servicio = new Servicio(nombre, foto, precio,puntos,activo);
+	private String saveFile(Part part, File pathUploads) {
+		String pathAbsolute = "";
 		
-		ServicioDAO dao = new ServicioDAOMySQL();
-		dao.modificarServicio(servicio);
-		mostrarListado(request, response);
+		try {
+			
+			Path path = Paths.get(part.getSubmittedFileName());
+			String fileName = path.getFileName().toString();
+			InputStream input = part.getInputStream();
+			
+			if(input != null) {
+				File file = new File(pathUploads, fileName);
+				pathAbsolute = file.getAbsolutePath();
+				Files.copy(input, file.toPath());
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		return pathAbsolute;
 	}
-    
+	
+	private boolean isExtension(String fileName, String[] extensions) {
+		for(String et : extensions) {
+			if(fileName.toLowerCase().endsWith(et)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
    
 	
 }

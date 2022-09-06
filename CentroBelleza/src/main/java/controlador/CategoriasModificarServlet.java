@@ -3,6 +3,7 @@ package controlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.annotation.MultipartConfig;
 
 import dao.CategoriaDAO;
 import dao.CategoriaDAOMySQL;
@@ -17,6 +18,7 @@ import modelo.Categoria;
 /**
  * Servlet implementation class ModificarSalon
  */
+@MultipartConfig
 @WebServlet(
 	    name = "CategoriasModificarServlet", 
 	    urlPatterns = {"/CategoriasModificarServlet"}
@@ -35,45 +37,26 @@ public class CategoriasModificarServlet extends HttpServlet {
      */
     public CategoriasModificarServlet() {
         super();
-        // TODO Auto-generated constructor stub
+     
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
+	
 		PrintWriter out = response.getWriter();
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
-	/*	  java.sql.Blob foto=null;
-			
-				FileInputStream myStream = new FileInputStream("C:\\Users\\Andrew\\git\\CentrosBelleza\\CentroBelleza\\src\\main\\webapp\\imagenes\\"+request.getParameter("foto"));
-				byte[] imageInBytes = IOUtils.toByteArray(myStream);
-
-				try {
-					foto = new javax.sql.rowset.serial.SerialBlob(imageInBytes);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
+		tipoCategoriaId = request.getParameter("tipoCategoriaId");
 		foto = request.getParameter("foto");
 		padre = Boolean.parseBoolean(request.getParameter("activo"));
 		activo = Boolean.parseBoolean(request.getParameter("activo"));
 		
 		boolean activo=false;
 		boolean padre=false;
-		
+		System.out.println(id);
+		System.out.println(nombre);
 		if(request.getParameter("activo") != null) {
 			activo=true;
 		}
@@ -81,8 +64,6 @@ public class CategoriasModificarServlet extends HttpServlet {
 			padre=true;
 		}
 		
-
-
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -98,8 +79,8 @@ public class CategoriasModificarServlet extends HttpServlet {
 		out.println("<ul>");
 		out.println("<li>Id: "+id+"</li>");
 		out.println("<li>Nombre: "+nombre+"</li>");
-	//	out.println("<li>Foto: <img width=\"100px\" src=\'data:image/jpg;base64,"+img+"' /></li>");
 		out.println("<li>Foto: "+foto+"</li>");
+		out.println("<li>Tipo Categoría: "+tipoCategoriaId+"</li>");
 		out.println("<li>activo: "+padre+"</li>");	
 		out.println("<li>activo: "+activo+"</li>");
 		out.println("</ul>");
@@ -107,13 +88,12 @@ public class CategoriasModificarServlet extends HttpServlet {
 		
 		out.println("</body>\r\n"
 				+ "</html>");
-		
+		foto = "\\imagenes\\"+foto;
 		Categoria p = new Categoria(id, nombre, foto, tipoCategoriaId, padre,activo);
 		
 		CategoriaDAO actualizarDAO = new CategoriaDAOMySQL();
 		actualizarDAO.modificarCategoria(p);
 		
-		System.out.println(p);
 		
 
 	}

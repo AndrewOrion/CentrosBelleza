@@ -16,9 +16,9 @@
     <div class="text">PERSONAS</div>
   </div></div>
 </td><td></td><td><div class="container">
-	<a href="SalonesServlet"><img src="salones.webp" class="image"  alt="Salones" /></a>
+	<a href="underConstruction.jsp"><img src="salones.webp" class="image"  alt="Salones" /></a>
 	 <div class="middle">
-    <div class="text">SALONES</div>
+    <div class="text"><del>SALONES</del></div>
   </div></div>
 </td><td></td><td><div class="container">
 	<a href="ServiciosServlet"><img src="servicios.jpg" class="image"  alt="Servicios" /></a>

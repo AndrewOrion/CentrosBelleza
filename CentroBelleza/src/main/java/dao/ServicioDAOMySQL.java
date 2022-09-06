@@ -134,7 +134,10 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	public int insertarServicio(Servicio a) {
 		Connection con = conexion.getConexion();
 		int resultado=0;
-		
+		boolean activoEstado = false;
+		if(a.isActivo()==true) {
+			activoEstado=true;
+		}
 		try {
 			consultaPreparada = con.prepareStatement(
 					"insert into servicios values(?,?,?,?,?,?)");
@@ -144,7 +147,7 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			consultaPreparada.setString(3, a.getFoto());
 			consultaPreparada.setDouble(4, a.getPrecio());
 			consultaPreparada.setInt(5, a.getPuntos());
-			consultaPreparada.setBoolean(6, a.isActivo());
+			consultaPreparada.setBoolean(6, activoEstado);
 			
 			resultado=consultaPreparada.executeUpdate();
 

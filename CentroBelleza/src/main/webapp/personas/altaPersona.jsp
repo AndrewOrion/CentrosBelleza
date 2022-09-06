@@ -4,6 +4,7 @@
 <%@page import="dao.ProvinciaDAO"%>
 <%@page import="modelo.Provincia"%>
 <%@page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,8 +25,8 @@
 		List<Provincia> listaProvincia = listaProvinciaDAO.getListaProvincias();
 	%>
 <div class="formu">
-      <form action="PersonasServlet" method="post">
-        <input type="hidden" name="opcion" value="insertar"/>
+      <form action="PersonasServlet" method="post" >
+      <!--   <input type="hidden" name="opcion" value="insertar"/> -->
       <table class="table table-striped">
       <tr>
       	<td>

@@ -22,12 +22,12 @@ import modelo.Servicio;
 /**
  * Servlet implementation class ServiciosEditarServlet
  */
-
+@jakarta.servlet.annotation.MultipartConfig
 @WebServlet(
 	    name = "ServiciosEditarServlet", 
 	    urlPatterns = {"/ServiciosEditarServlet"}
 	)
-@MultipartConfig
+
 public class ServiciosEditarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,22 +43,14 @@ public class ServiciosEditarServlet extends HttpServlet {
      */
     public ServiciosEditarServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		id = request.getParameter("id");
 		
 		PrintWriter out = response.getWriter();
 		
@@ -73,32 +65,13 @@ public class ServiciosEditarServlet extends HttpServlet {
 		puntos = p.getPuntos();
 		activo = p.isActivo();
 		
-		/*
-		java.sql.Blob rs=null;
-		if(p.getFoto()!=null){
-			rs=p.getFoto();
-		}		
-		String img ="";
-		try {
-			byte[] imageInBytes;
-			imageInBytes = IOUtils.toByteArray(p.getFoto().getBinaryStream());
-			img = org.apache.tomcat.util.codec.binary.Base64.encodeBase64String(imageInBytes);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
 		if(activo==true) {
 			activoEstado="checked";
 		}else {
 			activoEstado="";
 		}
-		String estado ="";
+	
 		
-	//	System.out.println(img);
 		
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
@@ -129,7 +102,7 @@ public class ServiciosEditarServlet extends HttpServlet {
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"foto\">Foto:</label></td><td>\n"
-				+ "            <input type=\"text\" name=\"foto\" id=\"foto\" value=''></td>\n"
+				+ "            <input type=\"file\" name=\"foto\" id=\"foto\" value='"+foto+"'></td>\n"
 				+ "        </tr>");
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"precio\">Precio:</label></td><td>\n"
@@ -157,7 +130,6 @@ public class ServiciosEditarServlet extends HttpServlet {
 				+ "</html>");
 		
 
-		
 		
 		
 
