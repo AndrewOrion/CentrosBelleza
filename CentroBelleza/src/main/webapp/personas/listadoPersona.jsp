@@ -69,8 +69,8 @@ List<Persona> lista = pDAO.getListaPersonas();
 				<td><%=a.getFechaAlta() %></td>
 				<td><%=a.getIp() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="PersonasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
-				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="eliminar.png" alt="X"/></a></td>		
+				<td><form action="PersonasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="/CentroBelleza/iconos/editar.png" alt="Editar" /></button></form></td>
+				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="/CentroBelleza/iconos/eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
 		

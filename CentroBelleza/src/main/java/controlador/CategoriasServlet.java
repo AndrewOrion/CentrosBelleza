@@ -20,6 +20,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import modelo.Categoria;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ *
+ *Implementación del servlet CategoriasServlet que contiene diversos métodos para
+ *mostrar listado de categoriass, eliminar categoria e insertar nueva categoria
+ */
 @MultipartConfig
 @WebServlet(
 	    name = "CategoriasServlet", 
@@ -36,7 +43,7 @@ public class CategoriasServlet extends HttpServlet {
 	boolean activo=false;
 	String opcion;
 	/*FOTO*/
-	private String pathFiles = "\\imagenes";
+	private String pathFiles = "\\imagenes\\";
 	private File uploads = new File(pathFiles);
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
     /**
@@ -50,6 +57,8 @@ public class CategoriasServlet extends HttpServlet {
 
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 *  Método doGet recibe parámetro opción del formulario y según la orden ejecuta un método u otro
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//envío parametro para listado o nuevo o eliminar...
@@ -66,6 +75,9 @@ public class CategoriasServlet extends HttpServlet {
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Método que instancia una categoria con los datos nuevos del formulario y llama al controlador
+	 * CategoriaDAOMySQL para que inserte la categoría nueva
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String opcion = request.getParameter("opcion");
@@ -73,7 +85,12 @@ public class CategoriasServlet extends HttpServlet {
 			insertarCategoria(request,response);
 		}
 	}
-		
+	
+	/**
+	 * Mñetodo para insertar una nueva categoría
+	 * 
+	 * 
+	 */
 	private void insertarCategoria(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		PrintWriter out = response.getWriter();
 		
@@ -81,12 +98,12 @@ public class CategoriasServlet extends HttpServlet {
 		nombre = request.getParameter("nombre");
         foto = request.getParameter("foto");
 		
-	try {
+	//try {
 		tipoCategoriaId = request.getParameter("tipoCategoriaId");
 		padre = Boolean.parseBoolean(request.getParameter("padre"));
 		activo = Boolean.parseBoolean(request.getParameter("activo"));		
 		
-			Part part = request.getPart("foto");
+		/*	Part part = request.getPart("foto");
 			System.out.println(part);
 			if(part == null) {
 				System.out.println("No ha seleccionado un archivo");
@@ -94,22 +111,25 @@ public class CategoriasServlet extends HttpServlet {
 			}
 			
 			if(isExtension(part.getSubmittedFileName(), extens)) {
-				String photo = saveFile(part, uploads);
-				Categoria p= new Categoria(nombre, photo, tipoCategoriaId, padre ,activo);
-				
+				String photo = saveFile(part, uploads);*/
+				Categoria p= new Categoria(nombre, foto, tipoCategoriaId, padre ,activo);
+				System.out.println(p);
 				CategoriaDAO dao = new CategoriaDAOMySQL();
 				dao.insertarCategoria(p); 
 				
 				mostrarListado(request,response);
-			}
+		//	}
 			
-		} catch (Exception e) {
+	/*	} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index.jsp");*/
 	}
-		
+	
+	/**
+	 * Método que muestra el formulario para realizar un alta nueva
+	 */
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoriaDAO dao = new CategoriaDAOMySQL();
@@ -121,7 +141,9 @@ public class CategoriasServlet extends HttpServlet {
 			
 		}
 
-	
+/**
+ * Método que muestra el listado de categorías
+ */
 	
 	private void mostrarListado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -132,6 +154,10 @@ public class CategoriasServlet extends HttpServlet {
 
 		}
 
+/**Método que elimina una categoría
+ * 
+ * 
+ */
 	private void eliminarCategoria(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String id = request.getParameter("ID"); 	
@@ -141,21 +167,7 @@ public class CategoriasServlet extends HttpServlet {
 		
 	}
 	
-    private void modificarCategoria(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		nombre = request.getParameter("nombre");
-		tipoCategoriaId = request.getParameter("tipoCategoriaId");
-		foto = request.getParameter("foto");
-		padre = Boolean.parseBoolean(request.getParameter("padre"));		
-		activo = Boolean.parseBoolean(request.getParameter("activo"));
-		
-		Categoria Categoria = new Categoria(nombre, foto, tipoCategoriaId,padre,activo);
-		
-		CategoriaDAO dao = new CategoriaDAOMySQL();
-		dao.modificarCategoria(Categoria);
-		mostrarListado(request, response);
-		
-	}
+   
 	private String saveFile(Part part, File pathUploads) {
 		String pathAbsolute = "";
 		

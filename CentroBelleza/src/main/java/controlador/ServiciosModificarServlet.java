@@ -15,7 +15,10 @@ import modelo.Servicio;
 
 
 /**
- * Servlet imparSalon
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet ServiciosModificarServlet que recibe del formulario de ServiciosEditarServlet los
+ * datos del servicio para modificarlo.
  */
 @MultipartConfig
 @WebServlet(
@@ -50,6 +53,7 @@ public class ServiciosModificarServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * doPost recibe del formulario los datos y los guarda en variables que se muestran posteriormente
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		
@@ -66,6 +70,9 @@ public class ServiciosModificarServlet extends HttpServlet {
 			activo=true;
 		}
 		
+		/**
+		 * Formulario que muestra los datos actualizados
+		 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -93,7 +100,9 @@ public class ServiciosModificarServlet extends HttpServlet {
 		foto = "\\imagenes\\"+foto;
 
 		Servicio s = new Servicio (id, nombre, foto, precio, puntos, activo);
-		
+		/**
+		 * Enviamos el objeto servicio s al método modificarServicio() que se encuentra en ServicioDAOMySQL
+		 */
 		ServicioDAO actualizarDAO = new ServicioDAOMySQL();
 		actualizarDAO.modificarServicio(s);
 		

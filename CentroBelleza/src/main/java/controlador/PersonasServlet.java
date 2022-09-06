@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import dao.PersonaDAO;
@@ -14,6 +15,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.Persona;
 import modelo.Provincia;
+
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ *
+ *Implementación del servlet PersonaServlet que contiene diversos métodos para
+ *mostrar listado de personas, eliminar persona e insertar nueva persona
+ */
 @WebServlet(
 	    name = "PersonasServlet", 
 	    urlPatterns = {"/PersonasServlet"}
@@ -48,9 +57,11 @@ public class PersonasServlet extends HttpServlet {
     }
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Método doGet recibe parámetro opción del formulario y según la orden ejecuta un método u otro
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//envío parametro para listado o nuevo o eliminar...
 		opcion = request.getParameter("opcion");
 		if (opcion==null || opcion.equals("listado")) {
 			mostrarListado(request,response);
@@ -62,6 +73,10 @@ public class PersonasServlet extends HttpServlet {
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Método que instancia una persona con los datos nuevos del formulario y llama al controlador
+	 * PersonaDAOMySQL para que inserte la persona nueva
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -95,7 +110,10 @@ public class PersonasServlet extends HttpServlet {
 		
 	}
 		
-	
+/**
+ * Método que muestra el formulario de alta persona	
+ * 
+ */
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PersonaDAO dao = new PersonaDAOMySQL();
@@ -108,7 +126,11 @@ public class PersonasServlet extends HttpServlet {
 		}
 	
 	
-	
+/**
+ * Muestra el listado de persona de la base de datos
+ * 	
+ * 
+ */
 	private void mostrarListado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		PersonaDAO dao = new PersonaDAOMySQL();//instancia la persona para acceder a bd
@@ -118,6 +140,10 @@ public class PersonasServlet extends HttpServlet {
 
 		}
 
+/**
+ * Elimina una persona según su id concreto
+ * 
+ */
 	private void eliminarPersona(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String id = request.getParameter("ID"); 	

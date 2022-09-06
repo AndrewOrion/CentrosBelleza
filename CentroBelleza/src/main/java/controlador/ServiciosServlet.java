@@ -23,6 +23,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import modelo.Servicio;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ *Implementación del servlet ServiciosServlet que contiene diversos métodos para
+ *mostrar listado de servicioss, eliminar e insertar nuevo servicio
+ *
+ */
 @MultipartConfig
 @WebServlet(
 	    name = "ServiciosServlet", 
@@ -53,6 +61,8 @@ public class ServiciosServlet extends HttpServlet {
 
     /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Método doGet recibe parámetro opción del formulario y según la orden ejecuta un método u otro
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//envío parametro para listado o nuevo o eliminar...
@@ -69,6 +79,9 @@ public class ServiciosServlet extends HttpServlet {
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
+	 * Método que instancia una persona con los datos nuevos del formulario y llama al controlador
+	 * ServicioDAOMySQL para que inserte el servicio nuevo
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String opcion = request.getParameter("opcion");
@@ -76,7 +89,11 @@ public class ServiciosServlet extends HttpServlet {
 			insertarServicio(request,response);
 		}
 	}
-		
+
+	/**
+	 * 
+	 * Método que inserta un nuevo servicio
+	 */
 	private void insertarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		PrintWriter out = response.getWriter();
 		
@@ -118,7 +135,12 @@ public class ServiciosServlet extends HttpServlet {
 			
 			response.sendRedirect("index.jsp");
 	}
-		
+
+	/**
+	 * 
+	 * Método que muestra el formulario de alta nueva de servicio
+	 * 
+	 */
 	private void mostrarFormularioAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ServicioDAO dao = new ServicioDAOMySQL();
@@ -130,7 +152,9 @@ public class ServiciosServlet extends HttpServlet {
 			
 		}
 	
-	
+	/**
+	 * Método que muestra el listado de servicios de la base de datos
+	 */
 	private void mostrarListado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		ServicioDAO dao = new ServicioDAOMySQL();
@@ -140,6 +164,9 @@ public class ServiciosServlet extends HttpServlet {
 
 		}
 
+	/**
+	 * Método que elimina un servicio de la base de datos según su id
+	 */
 	private void eliminarServicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String id = request.getParameter("ID"); 	

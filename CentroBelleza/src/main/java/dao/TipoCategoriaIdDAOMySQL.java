@@ -11,6 +11,13 @@ import modelo.Provincia;
 import modelo.TipoCategoriaId;
 import utilidades.ConexionBD;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Controlador donde se realizan las operaciones con la base de datos
+ *
+ */
 public class TipoCategoriaIdDAOMySQL implements TipoCategoriaIdDAO{
 	private ConexionBD conexion;
 	private Statement consulta = null;
@@ -21,6 +28,9 @@ public class TipoCategoriaIdDAOMySQL implements TipoCategoriaIdDAO{
 		conexion = new ConexionBD();
 	}
 
+	/**
+	 * Obtiene la lista de tipocategoria de la base de datos
+	 */
 	@Override
 	public List<TipoCategoriaId> getListaTipoCategoriaId() {
 		List<TipoCategoriaId> listaTipoCategoriaId = new ArrayList<TipoCategoriaId>();
@@ -54,6 +64,9 @@ public class TipoCategoriaIdDAOMySQL implements TipoCategoriaIdDAO{
 		return listaTipoCategoriaId;
 	}
 
+/**
+ * obtiene un tipo de categoría según su id
+  */
 	@Override
 	public TipoCategoriaId getTipoCategoriaId(String id) {
 		Connection con = conexion.getConexion();

@@ -12,6 +12,13 @@ import java.util.List;
 import modelo.Persona;
 import utilidades.ConexionBD;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Controlador donde se realizan las operaciones con la base de datos
+ *
+ */
 public class PersonaDAOMySQL implements PersonaDAO {
 	
 	private ConexionBD conexion;
@@ -22,6 +29,10 @@ public class PersonaDAOMySQL implements PersonaDAO {
 	public PersonaDAOMySQL() {
 		conexion = new ConexionBD();
 	}
+	
+	/**
+	 * Obtiene la lista de Persona de la base de datos
+	 */
 
 	@Override
 	public List<Persona> getListaPersonas(){
@@ -69,6 +80,10 @@ public class PersonaDAOMySQL implements PersonaDAO {
 
 		return listaPersonas;
 	}
+	
+	/**
+	 * Obtiene una persona concreta de la base de datos a través de su id
+	 */
 
 	@Override
 	public Persona getPersona(String id) {
@@ -121,7 +136,9 @@ public class PersonaDAOMySQL implements PersonaDAO {
 	}
 
 
-
+/**
+ * Elimina una persona de la base de datos según su id
+ */
 	@Override
 	public int eliminarPersona(String id) {
 		Connection con = conexion.getConexion();
@@ -147,7 +164,11 @@ public class PersonaDAOMySQL implements PersonaDAO {
 		}
 		return resultado;
 	}		
+
 	
+/**
+ * Inserta una nueva persona en la base de datos
+ */
 	@Override
 	public int insertarPersona(Persona a) {
 		Connection con = conexion.getConexion();
@@ -194,6 +215,10 @@ public class PersonaDAOMySQL implements PersonaDAO {
 
 	}
 
+	
+/**
+ * Modifica los datos existentes de una persona de la base de datos que obtiene a través de su ID
+ */
 	@Override
 	public int modificarPersona(Persona persona) {
 		Connection con = conexion.getConexion();

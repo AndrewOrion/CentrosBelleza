@@ -53,13 +53,13 @@ List<Categoria> lista = pDAO.getListaCategorias();
 				<td><%=a.getId() %></td>
 				<td><%=a.getNombre() %></td>
 				<td><%=a.getFoto() %></td>
-				<td><img width="100px" src="<%=a.getFoto() %>"/></td>				
+				<td><img width="100px" src="/CentroBelleza/<%=a.getFoto() %>"/></td>				
 				<td><%=a.getTipoCategoriaId() %></td>
 				<td><%=a.isPadre() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="CategoriasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
+				<td><form action="CategoriasEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="/CentroBelleza/iconos/editar.png" alt="Editar" /></button></form></td>
 				<td>
-				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="eliminar.png" alt="X"/></a></td>		
+				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="/CentroBelleza/iconos/eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
 		

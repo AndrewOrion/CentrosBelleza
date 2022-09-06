@@ -50,13 +50,13 @@ List<Servicio> lista = pDAO.getListaServicios();
 				<td><%=a.getNombre() %></td>
 			<!-- 	<td><img width="100px" src="data:image/jpg;base64,<%//=img %>" /></td>-->
 				<td><%=a.getFoto() %></td>
-				<td><img width="100px" src="<%=a.getFoto() %>"/></td>				
+				<td><img width="100px" src="/CentroBelleza/<%=a.getFoto() %>"/></td>				
 				<td><%=a.getPrecio() %></td>
 				<td><%=a.getPuntos() %></td>
 				<td><%=a.isActivo() %></td>
-				<td><form action="ServiciosEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="editar.png" alt="Editar" /></button></form></td>
+				<td><form action="ServiciosEditarServlet" method="post"><button type="submit" name="id" value='<%=a.getId() %>'><img src="/CentroBelleza/iconos/editar.png" alt="Editar" /></button></form></td>
 				<td>
-				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-s%C3%ADmbolo-de-la-cruz-roja-icono-como-eliminar-eliminar-error-o-icono-de-respuesta-incorrecta.jpg" alt="X"/></a></td>		
+				<a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="/CentroBelleza/iconos/eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
 		

@@ -22,7 +22,12 @@ import modelo.TipoCategoriaId;
 
 
 /**
- * Servlet implementation class PersonasEditServlet
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet CategoriasEditarServlet que muestra un formulario con los datos de la categoría
+ * a editar y se envían a CategoriasMoficarServlet para su actualización
+ *
  */
 @MultipartConfig
 @WebServlet(
@@ -55,7 +60,8 @@ public class CategoriasEditarServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Obtenemos los datos a modificar y se muestran para su edición
+	 *  
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
@@ -73,6 +79,9 @@ public class CategoriasEditarServlet extends HttpServlet {
 		padre = p.isPadre();
 		activo = p.isActivo();
 		
+		/**
+		 * Condicional para mostrar clicado o no el checkbox, según su estado
+		 */
 		if(activo==true) {
 			activoEstado="checked";
 		}else {
@@ -90,6 +99,10 @@ public class CategoriasEditarServlet extends HttpServlet {
 		TipoCategoriaIdDAO listaTipoCategoriaIdDAO = new TipoCategoriaIdDAOMySQL();
 		List<TipoCategoriaId> listaTipoCategoriaId = listaTipoCategoriaIdDAO.getListaTipoCategoriaId();
 		
+		/**
+		 * Formulario para actualizar categoría
+		 * 
+		 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -124,6 +137,11 @@ public class CategoriasEditarServlet extends HttpServlet {
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"tipoCategoriaId\">Tipo Categoria ID:</label></td><td>\n"
 				+ "            <select name=tipoCategoriaId id=\"tipoCategoriaId\">\n");
+		
+		/**
+		 * 
+		 * Bucle for para mostrar en el desplegable la lista de tipo de categoría 
+		 */
 				for (TipoCategoriaId p1:listaTipoCategoriaId) {
 					if(p1.getId()==tipoCategoriaId) {
 						estado="selected";

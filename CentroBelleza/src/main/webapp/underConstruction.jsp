@@ -12,7 +12,7 @@
 
 
 <div class="container">
-	<img src= "construccion.png"class="image"  alt="En Construccion" />
+	<img src= "/CentroBelleza/iconos/construccion.png" class="image"  alt="En Construccion" />
 	
 </div>
 

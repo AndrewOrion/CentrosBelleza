@@ -16,7 +16,12 @@ import modelo.Categoria;
 
 
 /**
- * Servlet implementation class ModificarSalon
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet CategoriasModificarServlet que recibe del formulario de CategoriasEditarServlet los
+ * datos de la categoría para modificarla.
+ *
  */
 @MultipartConfig
 @WebServlet(
@@ -40,8 +45,8 @@ public class CategoriasModificarServlet extends HttpServlet {
      
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * doPost recibe del formulario los datos y los guarda en variables que se muestran posteriormente
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
@@ -64,6 +69,9 @@ public class CategoriasModificarServlet extends HttpServlet {
 			padre=true;
 		}
 		
+		/**
+		 * Formulario que muestra los datos actualizados
+		 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -91,6 +99,9 @@ public class CategoriasModificarServlet extends HttpServlet {
 		foto = "\\imagenes\\"+foto;
 		Categoria p = new Categoria(id, nombre, foto, tipoCategoriaId, padre,activo);
 		
+		/**
+		 * Enviamos el objeto persona p al método modificarPersona() que se encuentra en PersonaDAOMySQL
+		 */
 		CategoriaDAO actualizarDAO = new CategoriaDAOMySQL();
 		actualizarDAO.modificarCategoria(p);
 		

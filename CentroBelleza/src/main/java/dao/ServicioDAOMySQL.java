@@ -13,6 +13,14 @@ import java.util.List;
 import modelo.Servicio;
 import utilidades.ConexionBD;
 
+
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Controlador donde se realizan las operaciones con la base de datos
+ *
+ */
 public class ServicioDAOMySQL implements ServicioDAO {
 
 	
@@ -24,6 +32,10 @@ public class ServicioDAOMySQL implements ServicioDAO {
 	public ServicioDAOMySQL() {
 		conexion = new ConexionBD();
 	}
+	
+	/**
+	 * Obtiene la lista de servicios de la base de datos
+	 */
 
 	@Override
 	public List<Servicio> getListaServicios(){
@@ -62,6 +74,9 @@ public class ServicioDAOMySQL implements ServicioDAO {
 		return listaServicios;
 	}
 
+	/** 
+	 * Obtiene un servicio según su id
+	 */
 	@Override
 	public Servicio getServicio(String id) {
 		Connection con = conexion.getConexion();
@@ -104,6 +119,9 @@ public class ServicioDAOMySQL implements ServicioDAO {
 		return s;
 	}
 
+	/**
+	 * Elimina un servicio según su id
+	 */
 	@Override
 	public int eliminarServicio(String id) {
 		Connection con = conexion.getConexion();
@@ -128,7 +146,11 @@ public class ServicioDAOMySQL implements ServicioDAO {
 			}
 		}
 		return resultado;
-	}		
+	}	
+	
+	/**
+	 * Inserta nuevo servicio en la base de datos
+	 */
 	
 	@Override
 	public int insertarServicio(Servicio a) {
@@ -168,6 +190,9 @@ public class ServicioDAOMySQL implements ServicioDAO {
 
 	}
 
+	/**
+	 * Modifica el servicio de la base de datos
+	 */
 	@Override
 	public int modificarServicio(Servicio servicio) {
 		Connection con = conexion.getConexion();

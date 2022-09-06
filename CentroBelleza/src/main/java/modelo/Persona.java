@@ -3,11 +3,13 @@ package modelo;
 import java.util.Date;
 import java.util.Objects;
 
-/** 
+/**
+ * @author Andrés Pino Gallardo 
  * Clase que modela los datos de una persona
  * 
- * @author Andres Pino
+ * 
  *
+ *Incluye constructor, getters y setters, toString, hashcode y equals
  */
 public class Persona {
 
@@ -28,7 +30,25 @@ public class Persona {
 	public Persona() {
 		
 	}
-	
+
+/**
+ * Constructor de clase Persona
+ * 
+ * @param id ->id único de la persona
+ * @param nombre ->nombre completo de la persona
+ * @param documento -> documento de identidad
+ * @param fechaNacimiento -> fecha de nacimiento de la persona
+ * @param direccion -> dirección de la persona
+ * @param localidad -> localidad donde vive
+ * @param cp -> código postal
+ * @param provinciaId -> id de la provincia que se obtiene de la tabla provincias
+ * @param email -> email de la persona
+ * @param telefono -> teléfono de la persona
+ * @param comunicaciones -> otras vías de comunicación
+ * @param fechaAlta -> fecha en la que se dio de alta
+ * @param ip -> número de ip
+ * @param activo -> booleano que indica si está activo o no
+ */
 	public Persona(String id, String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
 			String cp, int provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
 			String ip, boolean activo) {
@@ -48,7 +68,23 @@ public class Persona {
 		this.ip = ip;
 		this.activo = activo;
 	}
-	
+
+/**
+ * Constructor de clase persona sin incluir parámetro id
+ * @param nombre
+ * @param documento
+ * @param fechaNacimiento
+ * @param direccion
+ * @param localidad
+ * @param cp
+ * @param provinciaId
+ * @param email
+ * @param telefono
+ * @param comunicaciones
+ * @param fechaAlta
+ * @param ip
+ * @param activo
+ */
 	public Persona(String nombre, String documento, String fechaNacimiento, String direccion, String localidad,
 			String cp, int provinciaId, String email, String telefono, String comunicaciones, String fechaAlta,
 			String ip, boolean activo) {
@@ -68,6 +104,10 @@ public class Persona {
 		this.activo = activo;
 	}
 
+/** getters y setters de persona
+ * 
+ * 
+ */
 	public String getId() {
 		return id;
 	}

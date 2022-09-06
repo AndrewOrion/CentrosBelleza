@@ -18,7 +18,10 @@ import modelo.Provincia;
 
 
 /**
- * Servlet implementation class PersonasEditServlet
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet PersonasEditarServlet que muestra un formulario con los datos de la persona
+ * a editar y se envían a PersonasMoficarServlet para su actualización
  */
 
 @WebServlet(
@@ -59,7 +62,8 @@ public class PersonasEditarServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Obtenemos los datos a modificar y se muestran para su edición
+	 *  
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
@@ -85,6 +89,9 @@ public class PersonasEditarServlet extends HttpServlet {
 		ip = p.getIp();
 		activo = p.isActivo();
 		
+		/**
+		 * Condicional para mostrar clicado o no el checkbox, según su estado
+		 */
 		if(activo==true) {
 			activoEstado="checked";
 		}else {
@@ -95,6 +102,11 @@ public class PersonasEditarServlet extends HttpServlet {
 		ProvinciaDAO listaProvinciaDAO = new ProvinciaDAOMySQL();
 		List<Provincia> listaProvincia = listaProvinciaDAO.getListaProvincias();
 		
+		
+		/**
+		 * Formulario para actualizar persona
+		 * 
+		 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -145,6 +157,10 @@ public class PersonasEditarServlet extends HttpServlet {
 		out.println("<tr><td>\n"
 				+ "            <label class=\"text\" for=\"provinciaId\">Provincia:</label></td><td>\n"
 				+ "            <select name=provinciaId id=\"provinciaId\">\n");
+		
+		/**
+		 * Bucle for para mostrar en el desplegable la lista de provincias
+		 */
 				for (Provincia p1:listaProvincia) {
 					if(p1.getId()==provinciaId) {
 						estado="selected";

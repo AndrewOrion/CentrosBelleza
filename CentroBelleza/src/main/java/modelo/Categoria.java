@@ -3,6 +3,14 @@ package modelo;
 import java.sql.Blob;
 import java.util.Objects;
 
+/**
+ * @author Andres Pino Gallardo
+ * 
+ * Clase que modela los datos de una categoría 
+ * 
+ *
+ *Incluye constructores, getters y setter, toString, hashcode y equals
+ */
 public class Categoria {
 	
 	private String id;
@@ -12,6 +20,16 @@ public class Categoria {
 	private boolean padre;
 	private boolean activo;
 	
+/**Constructor de categoria
+ * 
+ * 
+ * @param id -> id de la categoria
+ * @param nombre -> nombre de la categoria
+ * @param foto -> ruta de la foto de categoria
+ * @param tipoCategoriaId -> tipo de categoria que coge de la tabla tipocategoria de la BBDD
+ * @param padre -> booleano que dice si es categoria padre o no
+ * @param activo -> booleano que indica si está o no activo
+ */
 	public Categoria(String id, String nombre, String foto, String tipoCategoriaId, boolean padre, boolean activo) {
 		super();
 		this.id = id;

@@ -11,22 +11,22 @@
 <table>
 
 <tr><td><div class="container">
-	<a href="PersonasServlet"><img src="personas.png" class="image"  alt="Personas" /></a>
+	<a href="PersonasServlet"><img src="/CentroBelleza/iconos/personas.png" class="image"  alt="Personas" /></a>
 	 <div class="middle">
     <div class="text">PERSONAS</div>
   </div></div>
 </td><td></td><td><div class="container">
-	<a href="underConstruction.jsp"><img src="salones.webp" class="image"  alt="Salones" /></a>
+	<a href="underConstruction.jsp"><img src="/CentroBelleza/iconos/salones.webp" class="image"  alt="Salones" /></a>
 	 <div class="middle">
     <div class="text"><del>SALONES</del></div>
   </div></div>
 </td><td></td><td><div class="container">
-	<a href="ServiciosServlet"><img src="servicios.jpg" class="image"  alt="Servicios" /></a>
+	<a href="ServiciosServlet"><img src="/CentroBelleza/iconos/servicios.jpg" class="image"  alt="Servicios" /></a>
 	 <div class="middle">
     <div class="text">SERVICIOS</div>
   </div></div>
 </td><td></td><td><div class="container">
-	<a href="CategoriasServlet"><img src="categorias.png" class="image"  alt="Categorias" /></a>
+	<a href="CategoriasServlet"><img src="/CentroBelleza/iconos/categorias.png" class="image"  alt="Categorias" /></a>
 	 <div class="middle">
     <div class="text">CATEGORIAS</div>
   </div></div>

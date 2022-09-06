@@ -3,6 +3,14 @@ package modelo;
 import java.sql.Blob;
 import java.util.Objects;
 
+/**
+ * 
+ *@author Andrés Pino Gallardo
+ *
+ *Clase que modela un servicio
+ *
+ *Incluye constructores, getter y setters, método toString
+ */
 public class Servicio {
 	
 	private String id;
@@ -15,6 +23,16 @@ public class Servicio {
 	public Servicio () {
 		
 	}
+	
+/**
+ * Constructor con parámetros
+ * @param id ->id único del servicio
+ * @param nombre -> nombre del servicio
+ * @param foto -> ruta de la imagen del servicio
+ * @param precio -> precio que tiene el servicio
+ * @param puntos ->puntos que se obtienen con el servicio
+ * @param activo -> booleano que indica si está o no activo el servicio
+ */
 	public Servicio(String id, String nombre, String foto, double precio, int puntos, boolean activo) {
 		super();
 		this.id = id;

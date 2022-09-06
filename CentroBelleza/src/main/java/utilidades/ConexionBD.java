@@ -6,7 +6,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author David
+ * @author Andrés Pino Gallardo
+ * 
+ * COnexión con la base datos
  *
  */
 public class ConexionBD {

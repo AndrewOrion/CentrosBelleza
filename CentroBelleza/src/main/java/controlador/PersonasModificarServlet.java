@@ -14,7 +14,12 @@ import modelo.Persona;
 
 
 /**
- * Servlet implementation class ModificarSalon
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet PersonasModificarServlet que recibe del formulario de PersonasEditarServlet los
+ * datos de la persona para modificarla.
+ *
  */
 @WebServlet(
 	    name = "PersonasModificarServlet", 
@@ -53,14 +58,15 @@ public class PersonasModificarServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	
+	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * doPost recibe del formulario los datos y los guarda en variables que se muestran posteriormente
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
 		PrintWriter out = response.getWriter();
+		
+	
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		documento = request.getParameter("documento");
@@ -81,7 +87,9 @@ public class PersonasModificarServlet extends HttpServlet {
 		if(request.getParameter("activo") != null) {
 			activo=true;
 		}
-		
+		/**
+		 * Formulario que muestra los datos actualizados
+		 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"
@@ -115,14 +123,20 @@ public class PersonasModificarServlet extends HttpServlet {
 		out.println("</body>\r\n"
 				+ "</html>");
 		
+		/**
+		 * Instaciamos la persona p de clase Persona
+		 */
 		Persona p = new Persona(id, nombre, documento, fechaNacimiento, direccion,
 				localidad, cp, provinciaId, email, telefono,comunicaciones,fechaAlta,
 				ip,activo);
 		
+		/**
+		 * Enviamos el objeto persona p al método modificarPersona() que se encuentra en PersonaDAOMySQL
+		 */
 		PersonaDAO actualizarDAO = new PersonaDAOMySQL();
 		actualizarDAO.modificarPersona(p);
 		
-		System.out.println(p);
+		//System.out.println(p);
 		
 
 	}

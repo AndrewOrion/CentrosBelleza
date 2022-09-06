@@ -20,7 +20,10 @@ import dao.ServicioDAOMySQL;
 import modelo.Servicio;
 
 /**
- * Servlet implementation class ServiciosEditarServlet
+ * @author Andrés Pino Gallardo
+ * 
+ * Implementación del Servlet ServiciosEditarServlet que muestra un formulario con los datos del servicio
+ * a editar y se envían a ServiciosMoficarServlet para su actualización
  */
 @jakarta.servlet.annotation.MultipartConfig
 @WebServlet(
@@ -72,7 +75,9 @@ public class ServiciosEditarServlet extends HttpServlet {
 		}
 	
 		
-		
+	/**
+	 * Formulario que se muestra con los datos de la persona a actualizar
+	 */
 		out.println("<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "<head>\r\n"

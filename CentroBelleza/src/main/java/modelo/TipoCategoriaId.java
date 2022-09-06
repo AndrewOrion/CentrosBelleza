@@ -2,11 +2,22 @@ package modelo;
 
 import java.util.Objects;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ *
+ *Clase que modela tipo de categoría
+ *Incluye constructor, getters y setters, toString
+ */
 public class TipoCategoriaId {
-
 	private String id;
 	private String nombre;
-	
+
+/**
+ * Constructor parametrizado
+ * @param id -> id único del tipo de categoría
+ * @param nombre -> nombre del tipo de categoría
+ */
 	public TipoCategoriaId(String id, String nombre) {
 		super();
 		this.id = id;

@@ -13,6 +13,13 @@ import java.util.List;
 import modelo.Categoria;
 import utilidades.ConexionBD;
 
+/**
+ * 
+ * @author Andrés Pino Gallardo
+ * 
+ * COntrolador donde se realizan las operaciones con la base de datos
+ *
+ */
 public class CategoriaDAOMySQL implements CategoriaDAO {
 
 	
@@ -25,6 +32,10 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 		conexion = new ConexionBD();
 	}
 
+	
+	/**
+	 * obtiene la lista de categorías de la base de datos
+	 */
 	@Override
 	public List<Categoria> getListaCategorias(){
 		List<Categoria> listaCategorias = new ArrayList<Categoria>();
@@ -63,6 +74,9 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 		return listaCategorias;
 	}
 
+	/**
+	 * obtiene una categoría concreta según su id
+	 */
 	@Override
 	public Categoria getCategoria(String id) {
 		Connection con = conexion.getConexion();
@@ -105,6 +119,9 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 		return s;
 	}
 
+	/**
+	 * Elimina una categoría según su id
+	 */
 	@Override
 	public int eliminarCategoria(String id) {
 		Connection con = conexion.getConexion();
@@ -131,6 +148,9 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 		return resultado;
 	}		
 	
+/**
+ * Inserta una categoría nueva
+ */
 	@Override
 	public int insertarCategoria(Categoria a) {
 		Connection con = conexion.getConexion();
@@ -178,6 +198,9 @@ public class CategoriaDAOMySQL implements CategoriaDAO {
 
 	}
 
+/**
+ * Modifica una categoría existente en la base de datos
+ */
 	@Override
 	public int modificarCategoria(Categoria Categoria) {
 		Connection con = conexion.getConexion();
