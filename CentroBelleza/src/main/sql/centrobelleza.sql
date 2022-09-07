@@ -1,4 +1,10 @@
-drop database if exists centrosBelleza;
+/**
+ * Andrés Pino Gallardo
+ * 
+ * Código creación Base de Datos y tablas y algunos ejemplos insertados para pruebas
+ */
+
+drop database if exists centrobelleza;
 create database centrosBelleza  character set latin1 collate latin1_spanish_Ci;
 USE centrosBelleza;
 

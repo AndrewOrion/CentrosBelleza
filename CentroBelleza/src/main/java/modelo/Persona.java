@@ -1,5 +1,9 @@
 package modelo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
@@ -245,7 +249,7 @@ public class Persona {
 				+ comunicaciones + ", fechaAlta=" + fechaAlta + ", IP=" + ip + ", activo=" + activo + "]";
 	}
 	
-	
+	 
 	
 	
 	

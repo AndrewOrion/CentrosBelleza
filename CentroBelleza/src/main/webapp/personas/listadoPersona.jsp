@@ -7,7 +7,11 @@
 <%@page import="dao.ProvinciaDAO"%>
 <%@page import="modelo.Provincia"%>
 <%@page import="java.util.List" %>
-
+<%@page import="java.io.File" %>
+<%@page import="java.io.FileWriter" %>
+<%@page import="java.time.LocalDateTime" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
+<%@page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,10 +77,12 @@ List<Persona> lista = pDAO.getListaPersonas();
 				<td><a href="?opcion=eliminar&ID=<%=a.getId()%>"><img class="img1" src="/CentroBelleza/iconos/eliminar.png" alt="X"/></a></td>		
 	
 			</tr>
-		
-			<%
-			}
-}
+	<%	}
+			
+ }			
+
+  
+   	
 	%>
 	</table>
 </div>
